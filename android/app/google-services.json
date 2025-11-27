@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "93188565590",
+    "project_id": "pampers-3rd-app-tfh-2025",
+    "storage_bucket": "pampers-3rd-app-tfh-2025.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93188565590:android:5e4666f07fc1ee3f6369f7",
+        "android_client_info": {
+          "package_name": "com.example.fff_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuCssa-R2Qe1gsZBVXpMLB9rr-cXCxF0g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

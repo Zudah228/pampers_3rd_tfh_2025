@@ -1,0 +1,93 @@
+{
+  "Snippets: Page": {
+    "scope": "dart",
+    "prefix": ["page"],
+    "body": [
+      "import 'package:app/core/app/components/route_animations/route_animations.dart';",
+      "import 'package:flutter/material.dart';",
+      "",
+      "class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/} extends StatelessWidget {",
+      "  const ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}._();",
+      "",
+      "  static const routeName = '/${TM_FILENAME_BASE}$0';",
+      "",
+      "  static Route<void> route() {",
+      "    return RouteAnimations.swipeBack<void>(",
+      "      settings: const RouteSettings(name: routeName),",
+      "      builder: (_) => const ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}._(),",
+      "    );",
+      "  }",
+      "",
+      "  @override",
+      "  Widget build(BuildContext context) {",
+      "    return Scaffold(",
+      "      appBar: AppBar(",
+      "        title: const Text('${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}'),",
+      "      ),",
+      "      body: const Center(child: Text('${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}')),",
+      "    );",
+      "  }",
+      "}",
+      "",
+    ]
+  },
+  
+  "Snippet: StatelessWidget": {
+    "scope": "dart",
+    "prefix": ["stless"],
+    "description": "Create an StatelessWidget",
+    "body": [
+      "import 'package:flutter/material.dart';",
+      "",
+      "class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/} extends StatelessWidget {",
+      "  const ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}({super.key});",
+      "",
+      "  @override",
+      "  Widget build(BuildContext context) {",
+      "    return Container();",
+      "  }",
+      "}",
+      "$0"
+    ]
+  },
+
+  // ConsumerWidget
+  "Snippet: ConsumerWidget": {
+    "scope": "dart",
+    "prefix": ["consumerWidget", "stless"],
+    "description": "Create an ConsumerWidget",
+    "body": [
+      "import 'package:flutter/material.dart';",
+      "import 'package:flutter_riverpod/flutter_riverpod.dart';",
+      "",
+      "class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/} extends ConsumerWidget {",
+      "  const ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}({super.key});",
+      "",
+      "  @override",
+      "  Widget build(BuildContext context, WidgetRef ref) {",
+      "    return Container();",
+      "  }",
+      "}",
+      "$0"
+    ]
+  },
+  "Snippet: HookConsumerWidget": {
+    "scope": "dart",
+    "prefix": ["consumerWidget", "stless"],
+    "description": "Create an HookConsumerWidget",
+    "body": [
+      "import 'package:flutter/material.dart';",
+      "import 'package:hooks_riverpod/hooks_riverpod.dart';",
+      "",
+      "class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/} extends HookConsumerWidget {",
+      "  const ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}({super.key});",
+      "",
+      "  @override",
+      "  Widget build(BuildContext context, WidgetRef ref) {",
+      "    return Container();",
+      "  }",
+      "}",
+      "$0"
+    ]
+  },
+}

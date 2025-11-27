@@ -1,0 +1,26 @@
+---
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+version: "0.2"
+allowCompoundWords: true
+ignoreRandomStrings: true
+dictionaryDefinitions:
+  - name: project-words
+    path: "./project-words.txt"
+    addWords: true
+dictionaries:
+  - project-words
+ignorePaths:
+  - "/project-words.txt"
+  - .gitignore
+  - env/**
+  - "*.g.dart"
+  - "*.freezed.dart"
+  - "*.gen.dart"
+  - "*.lock"
+  - "lib/**/firebase_options_*.dart"
+  - "build"
+  - ".metadata"
+ignoreRegExpList:
+  - "/#[0-9A-Fa-f]{8}/g"
+  - "/\\b[0-9A-Fa-f]{8}\\b/g"
+  - "// .+(.*):"
