@@ -1,0 +1,38 @@
+{
+  "Snippet: Freezed class": {
+    "scope": "dart",
+    "prefix": ["freezed"],
+    "description": "Create a Firestore Freezed class",
+    "body": [
+      "import 'package:app/core/utils/json_converter/timestamp_converter.dart';",
+      "import 'package:cloud_firestore/cloud_firestore.dart';",
+      "import 'package:freezed_annotation/freezed_annotation.dart';",
+      "",
+      "part '$TM_FILENAME_BASE.freezed.dart';",
+      "part '$TM_FILENAME_BASE.g.dart';",
+      "",
+      "@freezed",
+      "abstract class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/} with _$${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/} {",
+      "  const factory ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}({",
+      "    $0",
+      "    @CreatedAtTimestampConverter() DateTime? createdAt,",
+      "    @UpdatedAtTimestampConverter() DateTime? updatedAt,",
+      "  }) = _${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/};",
+      "",
+      "  const ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}._();",
+      "",
+      "  factory ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}.fromJson(Map<String, Object?> json) => _$${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}FromJson(json);",
+      "}",
+      "",
+      "typedef ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Keys = _$${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}JsonKeys;",
+      "",
+      "extension ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}FirestoreExtension on CollectionReference<Map<String, dynamic>> {",
+      "  CollectionReference<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}> get with${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Converter => withConverter<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}>(",
+      "    fromFirestore: (snapshot, _) => ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}.fromJson(snapshot.data()!),",
+      "    toFirestore: (user, _) => user.toJson(),",
+      "  );",
+      "}",
+      "",
+    ]
+  }
+}
