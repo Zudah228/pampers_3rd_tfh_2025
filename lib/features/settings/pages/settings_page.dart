@@ -8,7 +8,9 @@ import 'package:app/features/auth/providers/current_user_provider.dart';
 import 'package:app/features/debug/debug_page.dart';
 import 'package:app/features/settings/components/setting_list_box.dart';
 import 'package:app/features/user/pages/user_settings_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SettingsPage extends ConsumerWidget {
@@ -39,6 +41,14 @@ class SettingsPage extends ConsumerWidget {
                 leading: const Icon(Icons.menu_book),
                 title: const Text('ライセンス'),
                 onTap: () {
+                  LicenseRegistry.addLicense(() async* {
+                    final String license = await rootBundle.loadString(
+                      'assets/fonts/Noto_Sans_JP/OFL.txt',
+                    );
+                    yield LicenseEntryWithLineBreaks(<String>[
+                      'google_fonts',
+                    ], license);
+                  });
                   Navigator.of(context).push(
                     RouteAnimations.noAnimation<void>(
                       settings: const RouteSettings(name: '/license'),
