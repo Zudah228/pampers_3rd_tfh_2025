@@ -1,6 +1,12 @@
 # コンポーネントの設計のルール
 切り分けたコンポーネント、共通化するコンポーネントのルール。
 
+## 命名規則
+- コンポーネント名を明示するサフィックスを付与
+    - **Bad:** `MemberList` → **Good:** `MemberListView`
+    - **Bad:** `MemberList` → **Good:** `MemberListSliver`
+    - **Bad:** `Home` → **Good:** `HomePage`
+
 ## ウィジェット引数として、表示するためだけの String、IconData は使わない
 
 ### ❌ NG
