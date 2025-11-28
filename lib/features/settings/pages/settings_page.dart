@@ -5,7 +5,7 @@ import 'package:app/core/service/package_info/package_info_service.dart';
 import 'package:app/features/auth/models/current_user.dart';
 import 'package:app/features/auth/pages/sign_in_page.dart';
 import 'package:app/features/auth/providers/current_user_provider.dart';
-import 'package:app/features/debug/debug_page.dart';
+import 'package:app/features/debug/pages/debug_page.dart';
 import 'package:app/features/settings/components/setting_list_box.dart';
 import 'package:app/features/user/pages/user_settings_page.dart';
 import 'package:flutter/foundation.dart';
