@@ -78,7 +78,9 @@ class CommonDialog extends StatelessWidget {
               child: title!,
             )
           : SizedBox(height: 16),
-      titlePadding: title != null ? EdgeInsets.only(top: 16) + defaultPadding : .zero,
+      titlePadding: title != null
+          ? EdgeInsets.only(top: 16) + defaultPadding
+          : .zero,
       titleTextStyle: content == null ? themeData.textTheme.titleMedium : null,
       contentPadding: effectiveContentPadding,
       content: content != null
