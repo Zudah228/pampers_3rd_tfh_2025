@@ -240,8 +240,8 @@ class _LoadingIndicatorState extends State<_LoadingIndicator> {
                   bottom: 32 + MediaQuery.paddingOf(context).bottom,
                   top: 4,
                 ),
-                child: const OverflowBox(
-                  maxHeight: 24,
+                child: OverflowBox(
+                  maxHeight: math.max(_outRange, 24),
                   child: _ProgressIndicator(),
                 ),
               ),
