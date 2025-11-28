@@ -4,4 +4,6 @@ abstract final class FirestoreCollections {
   const FirestoreCollections._();
 
   static const users = 'users';
+
+  static const debug_items = 'debug/v1/items';
 }
