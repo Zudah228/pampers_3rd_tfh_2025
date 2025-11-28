@@ -58,7 +58,7 @@ class SettingsPage extends ConsumerWidget {
                 },
               ),
               _ListTile(
-                leading: const Icon(Icons.bug_report),
+                leading: Icon(Icons.bug_report, color: Colors.green[200]),
                 title: const Text('デバッグ'),
                 onTap: () {
                   Navigator.of(context).push(DebugPage.route());
