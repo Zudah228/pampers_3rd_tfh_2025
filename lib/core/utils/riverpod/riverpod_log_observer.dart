@@ -28,7 +28,6 @@ final class RiverpodLogObserver extends ProviderObserver {
     Object? value, [
     Object? previousValue,
   ]) {
-    logger.debug('$operation $context.provider $value');
     if (context.provider.name != null) {
       logger.debug('#${context.provider} [$operation] $value');
       return;

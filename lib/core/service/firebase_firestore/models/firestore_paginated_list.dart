@@ -106,7 +106,7 @@ abstract class FirestorePaginatedListNotifier<T>
     final current = state.requireValue;
     final ret = await fetch(current.items.lastOrNull?.snapshot);
 
-    state = AsyncData(state.requireValue.append(ret));
+    state = AsyncData(current.append(ret));
   }
 }
 
