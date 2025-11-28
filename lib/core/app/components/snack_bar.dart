@@ -5,7 +5,6 @@ import '../global_keys.dart';
 enum _SnackBarMessageType {
   info,
   error,
-  ;
 }
 
 ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showErrorSnackBar({
@@ -57,7 +56,8 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> _show({
   if (clearSnackBarsBeforeShow) {
     state.clearSnackBars();
   }
-  final context = scaffoldMessengerState?.context ??
+  final context =
+      scaffoldMessengerState?.context ??
       globalScaffoldMessengerKey.currentContext!;
   final colorScheme = Theme.of(context).colorScheme;
 

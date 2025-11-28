@@ -1,4 +1,3 @@
-
 const List<String> prefectures = [
   '北海道',
   '青森県',

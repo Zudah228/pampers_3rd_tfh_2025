@@ -7,7 +7,6 @@ sealed class ImageFieldValue {
   factory ImageFieldValue.memory(Uint8List memory) = MemoryImageValue;
 }
 
-
 class StoragePathImageValue extends ImageFieldValue {
   const StoragePathImageValue(this.path);
 

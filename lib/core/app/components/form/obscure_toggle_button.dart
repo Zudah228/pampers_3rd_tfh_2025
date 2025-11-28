@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ObscureToggleButton extends StatelessWidget {
-  const ObscureToggleButton({super.key, required this.obscureText, required this.onPressed});
+  const ObscureToggleButton({
+    super.key,
+    required this.obscureText,
+    required this.onPressed,
+  });
 
   final bool obscureText;
   final VoidCallback onPressed;

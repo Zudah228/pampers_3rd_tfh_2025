@@ -1,7 +1,9 @@
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod/riverpod.dart';
 
-final packageInfoServiceProvider = Provider.autoDispose<PackageInfoService>((ref) {
+final packageInfoServiceProvider = Provider.autoDispose<PackageInfoService>((
+  ref,
+) {
   throw UnimplementedError(
     'PackageInfoService.init() を実行して packageInfoServiceProvider を override してください',
   );
