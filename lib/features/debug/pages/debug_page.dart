@@ -2,7 +2,6 @@ import 'package:app/core/app/components/route_animations/route_animations.dart';
 import 'package:app/core/app/components/separator.dart';
 import 'package:app/features/debug/pages/debug_components_page.dart';
 import 'package:app/features/debug/pages/debug_firebase_page.dart';
-import 'package:app/features/debug/pages/debug_firestore_pagination_page.dart';
 import 'package:app/features/debug_form/pages/debug_form_page.dart';
 import 'package:flutter/material.dart';
 
@@ -46,13 +45,6 @@ class DebugPage extends StatelessWidget {
             title: const Text('Firebase'),
             onTap: () {
               Navigator.push(context, DebugFirebasePage.route());
-            },
-          ),
-          _ListTile(
-            leading: const Icon(Icons.two_wheeler_rounded),
-            title: const Text('Firestore ページネーション'),
-            onTap: () {
-              Navigator.push(context, DebugFirestorePaginationPage.route());
             },
           ),
         ].separatedWith(const SizedBox(height: 16)),
