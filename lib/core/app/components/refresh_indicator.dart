@@ -10,10 +10,12 @@ class RefreshAndLoadingIndicator extends StatelessWidget {
     super.key,
     this.onRefresh,
     this.onLoading,
+    this.enabledOnLoading = true,
     this.loadingNotificationPredicate = _defaultLoadingNotificationPredicate,
   });
 
   final Widget child;
+  final bool enabledOnLoading;
   final RefreshCallback? onRefresh;
   final RefreshCallback? onLoading;
   final bool Function(double outRange) loadingNotificationPredicate;
@@ -28,6 +30,7 @@ class RefreshAndLoadingIndicator extends StatelessWidget {
     if (onLoading != null) {
       child = _LoadingIndicator(
         onRefresh: onLoading!,
+        enabled: enabledOnLoading,
         loadingNotificationPredicate: loadingNotificationPredicate,
         child: child,
       );
@@ -193,8 +196,10 @@ class _LoadingIndicator extends StatefulWidget {
     required this.onRefresh,
     required this.child,
     required this.loadingNotificationPredicate,
+    required this.enabled,
   });
 
+  final bool enabled;
   final RefreshCallback onRefresh;
   final Widget child;
   final bool Function(double outRange) loadingNotificationPredicate;
@@ -209,6 +214,10 @@ class _LoadingIndicatorState extends State<_LoadingIndicator> {
   double _outRange = 0;
 
   Future<void> _onRefresh() async {
+    if (!widget.enabled) {
+      return;
+    }
+
     await widget.onRefresh();
     await Future<void>.delayed(const Duration(milliseconds: 500));
   }
@@ -217,6 +226,10 @@ class _LoadingIndicatorState extends State<_LoadingIndicator> {
   Widget build(BuildContext context) {
     return NotificationListener<ScrollUpdateNotification>(
       onNotification: (notification) {
+        if (!widget.enabled) {
+          return false;
+        }
+
         setState(() {
           _outRange =
               notification.metrics.pixels -
@@ -231,7 +244,7 @@ class _LoadingIndicatorState extends State<_LoadingIndicator> {
       child: Stack(
         children: [
           widget.child,
-          if (_outRange > 0)
+          if (widget.enabled && _outRange > 0)
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(

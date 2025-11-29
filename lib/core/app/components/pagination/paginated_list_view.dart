@@ -71,7 +71,8 @@ class PaginatedListView<T> extends StatelessWidget {
       hasMore: hasMore,
       child: RefreshAndLoadingIndicator(
         onRefresh: onRefresh,
-        onLoading: items.isNotEmpty && hasMore ? onLoading : null,
+        enabledOnLoading: items.isNotEmpty && hasMore,
+        onLoading: onLoading,
         child: builder(items),
       ),
     );
