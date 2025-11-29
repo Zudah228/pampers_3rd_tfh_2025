@@ -36,11 +36,12 @@ class _AddPhotoState extends ConsumerState<AddPhoto> {
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              // TODO: お題を表示
-              Headline2(child: Text('最近食べたご飯は何でしたか？')),
+              Headline2(
+                child: Text(room?.getTodaySubject() ?? 'お題を読み込み中...'),
+              ),
               const SizedBox(height: 8),
               // 写真で回答
               Row(
