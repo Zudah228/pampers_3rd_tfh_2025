@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:app/core/utils/unique_string_generator.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:path/path.dart' as p;
@@ -20,23 +21,19 @@ class FirebaseStorageService {
   }
 
   Future<String> uploadImage(
-    String path,
+    String directoryPath,
     Uint8List imageBinary, {
     CompressFormat format = CompressFormat.jpeg,
     int minHeight = 1024,
     int minWidth = 1024,
   }) async {
-    var ext = p.extension(path);
-
-    if (ext.isEmpty) {
-      ext = switch (format) {
-        CompressFormat.jpeg => '.jpg',
-        CompressFormat.png => '.png',
-        CompressFormat.heic => '.heic',
-        CompressFormat.webp => '.webp',
-      };
-      path += ext;
-    }
+    final ext = switch (format) {
+      CompressFormat.jpeg => '.jpg',
+      CompressFormat.png => '.png',
+      CompressFormat.heic => '.heic',
+      CompressFormat.webp => '.webp',
+    };
+    final path = p.join(directoryPath, UniqueStringGenerator.hashcode() + ext);
     final storageRef = _storage.ref().child(path);
     imageBinary = await FlutterImageCompress.compressWithList(
       imageBinary,

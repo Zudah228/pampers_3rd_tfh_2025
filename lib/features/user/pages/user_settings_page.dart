@@ -6,7 +6,6 @@ import 'package:app/core/app/components/future/future_switcher.dart';
 import 'package:app/core/app/components/route_animations/route_animations.dart';
 import 'package:app/core/service/firebase_storage/firebase_storage_service.dart';
 import 'package:app/core/service/firebase_storage/storage_paths.dart';
-import 'package:app/core/utils/unique_string_generator.dart';
 import 'package:app/features/auth/providers/current_user_provider.dart';
 import 'package:app/features/user/components/user_form.dart';
 import 'package:app/features/user/models/user.dart';
@@ -53,7 +52,6 @@ class UserSettingsPage extends ConsumerWidget {
                       .uploadImage(
                         StoragePaths.user_avatar(
                           id,
-                          UniqueStringGenerator.hashcode(),
                         ),
                         memory,
                       ),

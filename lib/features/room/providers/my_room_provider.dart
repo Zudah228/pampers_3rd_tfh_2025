@@ -17,6 +17,7 @@ final myRoomProvider = StreamProvider.autoDispose<Room?>((ref) {
   return firestore
       .collection(FirestoreCollections.roomRelations(userId))
       .withRoomRelationConverter
+      .orderBy(RoomKeys.createdAt, descending: true)
       .limit(1)
       .snapshots()
       .asyncMap((snapshot) async {
@@ -29,7 +30,8 @@ final myRoomProvider = StreamProvider.autoDispose<Room?>((ref) {
         final roomSnapshot = await firestore
             .collection(FirestoreCollections.rooms)
             .withRoomConverter
-            .doc(roomId).get();
+            .doc(roomId)
+            .get();
         return roomSnapshot.exists ? roomSnapshot.data() : null;
       });
 });
