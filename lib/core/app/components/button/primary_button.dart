@@ -18,6 +18,14 @@ class PrimaryButton extends DefaultButton {
     this.foregroundColor,
   }) : super(size: DefaultButtonSize.large);
 
+  const PrimaryButton.small({
+    super.key,
+    required this.child,
+    required this.onPressed,
+    this.backgroundColor,
+    this.foregroundColor,
+  }) : super(size: DefaultButtonSize.small);
+
   const PrimaryButton.custom({
     super.key,
     required this.child,
