@@ -14,7 +14,7 @@ _RoomRelation _$RoomRelationFromJson(Map<String, dynamic> json) =>
         final val = _RoomRelation(
           id: $checkedConvert('id', (v) => v as String),
           userId: $checkedConvert('user_id', (v) => v as String),
-          enabled: $checkedConvert('enabled', (v) => v as bool? ?? false),
+          enabled: $checkedConvert('enabled', (v) => v as bool? ?? true),
           createdAt: $checkedConvert(
             'created_at',
             (v) => const CreatedAtTimestampConverter().fromJson(v),

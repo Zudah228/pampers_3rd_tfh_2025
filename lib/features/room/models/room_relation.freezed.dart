@@ -213,7 +213,7 @@ return $default(_that.id,_that.userId,_that.enabled,_that.createdAt,_that.update
 @JsonSerializable()
 
 class _RoomRelation extends RoomRelation {
-  const _RoomRelation({required this.id, required this.userId, this.enabled = false, @CreatedAtTimestampConverter() this.createdAt, @UpdatedAtTimestampConverter() this.updatedAt}): super._();
+  const _RoomRelation({required this.id, required this.userId, this.enabled = true, @CreatedAtTimestampConverter() this.createdAt, @UpdatedAtTimestampConverter() this.updatedAt}): super._();
   factory _RoomRelation.fromJson(Map<String, dynamic> json) => _$RoomRelationFromJson(json);
 
 @override final  String id;
