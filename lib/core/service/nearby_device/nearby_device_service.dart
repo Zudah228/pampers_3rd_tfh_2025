@@ -60,5 +60,10 @@ class NearbyDeviceService {
     );
   }
 
-  Future<void> sendMessage(String device) async {}
+  Future<void> sendMessage({
+    required String deviceId,
+    required String message,
+  }) async {
+    await _nearbyService.sendMessage(deviceId, message);
+  }
 }
