@@ -28,6 +28,6 @@ typedef RoomKeys = _$RoomJsonKeys;
 extension RoomFirestoreExtension on CollectionReference<Map<String, dynamic>> {
   CollectionReference<Room> get withRoomConverter => withConverter<Room>(
     fromFirestore: (snapshot, _) => Room.fromJson(snapshot.data()!),
-    toFirestore: (user, _) => user.toJson(),
+    toFirestore: (room, _) => room.toJson(),
   );
 }
