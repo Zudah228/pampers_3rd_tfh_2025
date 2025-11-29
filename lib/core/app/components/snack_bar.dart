@@ -1,3 +1,4 @@
+import 'package:app/core/exceptions/message_exception.dart';
 import 'package:flutter/material.dart';
 
 import '../global_keys.dart';
@@ -8,13 +9,18 @@ enum _SnackBarMessageType {
 }
 
 ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showErrorSnackBar({
-  required String message,
+  required Object error,
   SnackBarAction? action,
   ScaffoldMessengerState? scaffoldMessengerState,
 
   /// SnackBar 表示前に、すでに表示されているものを非表示にする
   bool clearSnackBarsBeforeShow = false,
 }) {
+  String message = 'エラーが発生しました';
+
+  if (error is MessageException) {
+    message = error.message;
+  }
   return _show(
     message: message,
     messageType: _SnackBarMessageType.error,

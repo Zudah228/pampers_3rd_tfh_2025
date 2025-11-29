@@ -47,7 +47,7 @@ class _FullScreenLoadingIndicatorState
     } on Exception catch (error, stackTrace) {
       logger.error('', error: error, stackTrace: stackTrace);
 
-      showErrorSnackBar(message: 'エラーが発生しました');
+      showErrorSnackBar(error: error);
     } finally {
       _isLoadingNotifier.value = false;
     }

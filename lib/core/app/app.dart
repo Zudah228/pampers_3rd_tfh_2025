@@ -1,8 +1,8 @@
 import 'package:app/core/app/app_state.dart';
 import 'package:app/core/app/components/full_screen_loading_indicator.dart';
-import 'package:app/core/app/theme/theme.dart';
 import 'package:app/core/app/global_keys.dart';
-import 'package:app/features/home/pages/home_page.dart';
+import 'package:app/core/app/theme/theme.dart';
+import 'package:app/features/home/pages/home_page_shell.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -28,7 +28,7 @@ class MainApp extends StatelessWidget {
       scaffoldMessengerKey: globalScaffoldMessengerKey,
       debugShowCheckedModeBanner: false,
       builder: (context, child) => FullScreenLoadingIndicator.wrap(child!),
-      home: const HomePage(),
+      home: const HomePageShell(),
     );
   }
 }
