@@ -45,6 +45,7 @@ class CreateRoomUseCase {
       createdBy: userId,
       name: name,
       keyFilePath: path,
+      subjects: defaultSubjects,
       maxCount: 2,
       currentCount: 1,
     );
