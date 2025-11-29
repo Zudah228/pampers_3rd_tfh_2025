@@ -9,12 +9,6 @@ class ErrorButton extends DefaultButton {
     required this.onPressed,
   }) : super(size: DefaultButtonSize.medium);
 
-  const ErrorButton.small({
-    super.key,
-    required this.child,
-    required this.onPressed,
-  }) : super(size: DefaultButtonSize.small);
-
   const ErrorButton.large({
     super.key,
     required this.child,

@@ -14,12 +14,6 @@ class SecondaryButton extends DefaultButton {
     required this.onPressed,
   }) : super(size: DefaultButtonSize.large);
 
-  const SecondaryButton.small({
-    super.key,
-    required this.child,
-    required this.onPressed,
-  }) : super(size: DefaultButtonSize.small);
-
   final Widget child;
   final VoidCallback? onPressed;
 
