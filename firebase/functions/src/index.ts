@@ -1,69 +1,98 @@
-import { initializeApp } from "firebase-admin/app"
-import { getFirestore } from "firebase-admin/firestore"
-import { getStorage } from "firebase-admin/storage"
-import * as functions from "firebase-functions/v2"
+import * as aws from "aws-sdk";
+import { initializeApp } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
+import { getStorage } from "firebase-admin/storage";
+import * as functions from "firebase-functions/v2";
 
-initializeApp(functions.config().firebase)
+initializeApp(functions.config().firebase);
 
-const firestore = getFirestore()
+const firestore = getFirestore();
 firestore.settings({
-    // undefined の値を Firestore に追加しない設定。
-    ignoreUndefinedProperties: true,
-})
+	// undefined の値を Firestore に追加しない設定。
+	ignoreUndefinedProperties: true,
+});
 
-const storage = getStorage()
+const storage = getStorage();
 
 functions.setGlobalOptions({ region: "asia-northeast1" });
 
-export const saveFaceIds = functions.https.onCall(async (request) => {
-    const { auth, data } = request
+const download = async (filePath: string): Promise<Buffer> => {
+	const response = await storage.bucket().file(filePath).get();
+	const bufferResponse = await response[0].download();
+	const buffer = bufferResponse[0].buffer;
+	return Buffer.from(buffer);
+};
 
-    if (auth == null) {
-        throw new functions.https.HttpsError("unauthenticated", "認証エラー")
-    }
+const awsRekognition = new aws.Rekognition();
 
-    const filePath = data.file_path
-    const roomId = data.room_id
+const _compareFaces = async (sourceImage: Buffer, targetImage: Buffer) => {
+	const response = await awsRekognition
+		.compareFaces({
+			SourceImage: {
+				Bytes: sourceImage,
+			},
+			TargetImage: {
+				Bytes: targetImage,
+			},
+		})
+		.promise();
 
-    if (!filePath || !roomId) {
-        throw new functions.https.HttpsError("resource-exhausted", "file_path,roomId が必要です")
-    }
+	return response;
+};
 
-    const response = await storage.bucket().file(filePath).get()
-    // TODO: Azure 経由で顔の ID をとってきて、face_ids を返す
-    response
+export const compareFaces = functions.https.onCall(async (request) => {
+	const { auth, data } = request;
 
-    const face_ids: string[] = []
+	if (auth == null) {
+		throw new functions.https.HttpsError("unauthenticated", "認証エラー");
+	}
 
-    await firestore.doc(`room/${roomId}`).update({
-        face_ids,
-    })
+	const filePath = data.file_path;
+	const roomId = data.room_id;
 
-    return {
-      face_ids
-    }
-})
+	if (!filePath || !roomId) {
+		throw new functions.https.HttpsError(
+			"resource-exhausted",
+			"file_path,roomId が必要です",
+		);
+	}
 
-export const fetchFaceIds = functions.https.onCall(async (request) => {
-    const { auth, data } = request
+	const groupImage = await download(filePath);
 
-    if (auth == null) {
-        throw new functions.https.HttpsError("unauthenticated", "認証エラー")
-    }
+	const members = await firestore
+		.collectionGroup("related_rooms")
+		.where("room_id", "==", roomId)
+		.get();
+	const userIds = members.docs.map<string>((doc) => doc.data().user_id);
 
-    const filePath = data.file_path
+	const userImages = await Promise.all(
+		userIds.map(async (userId) => {
+			const imagePath = await firestore.collection("users").doc(userId).get();
 
-    if (!filePath) {
-        throw new functions.https.HttpsError("resource-exhausted", "file_path が必要です")
-    }
+			const avatarPath = imagePath.data()?.avatar_path;
+			if (!avatarPath) {
+				throw new functions.https.HttpsError(
+					"resource-exhausted",
+					"avatar_path が設定されていないユーザーがいます",
+				);
+			}
 
-    const response = await storage.bucket().file(filePath).get()
-    // TODO: Azure 経由で顔の ID をとってきて、face_ids を返す
-    response
+			return download(avatarPath);
+		}),
+	);
 
-    const face_ids: string[] = []
+	const compareFacesResponses = await Promise.all(
+		userImages.map(async (userImage) => {
+			return _compareFaces(groupImage, userImage);
+		}),
+	);
 
-    return {
-      face_ids
-    }
-})
+    // すべてのユーザーが顔が、１人以上と一致しているかどうかを判断
+	const success = compareFacesResponses.every(
+        (response) => response.FaceMatches ? response.FaceMatches.length > 0 : false,
+    )
+    ;
+	return {
+        success,
+    };
+});
