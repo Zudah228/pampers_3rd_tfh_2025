@@ -47,17 +47,17 @@ export const compareFaces = functions.https.onCall(async (request) => {
 		throw new functions.https.HttpsError("unauthenticated", "認証エラー");
 	}
 
-	const filePath = data.file_path;
+	const imageBase64 = data.image;
 	const roomId = data.room_id;
 
-	if (!filePath || !roomId) {
+	if (!imageBase64 || typeof imageBase64 !== "string" || !roomId || typeof roomId !== "string") {
 		throw new functions.https.HttpsError(
 			"resource-exhausted",
 			"file_path,roomId が必要です",
 		);
 	}
 
-	const groupImage = await download(filePath);
+	const groupImage = Buffer.from(imageBase64, "base64");
 
 	const members = await firestore
 		.collectionGroup("related_rooms")
