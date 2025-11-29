@@ -41,6 +41,8 @@ dependencies:
   path: ^1.9.1
   firebase_messaging: ^16.0.4
   flutter_local_notifications: ^19.5.0
+  flutter_nearby_connections: ^1.1.2
+  device_info: ^2.0.3
 
 dev_dependencies:
   flutter_test:

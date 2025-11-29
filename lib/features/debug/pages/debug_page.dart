@@ -5,6 +5,7 @@ import 'package:app/features/debug/pages/debug_fcm_page.dart';
 import 'package:app/features/debug/pages/debug_firebase_page.dart';
 import 'package:app/features/debug_firestore/pages/debug_firestore_pagination_page.dart';
 import 'package:app/features/debug_form/pages/debug_form_page.dart';
+import 'package:app/features/debug_nearby_device/pages/debug_nearby_device_page.dart';
 import 'package:flutter/material.dart';
 
 class DebugPage extends StatelessWidget {
@@ -40,6 +41,13 @@ class DebugPage extends StatelessWidget {
             title: const Text('フォーム'),
             onTap: () {
               Navigator.push(context, DebugFormPage.route());
+            },
+          ),
+          _ListTile(
+            leading: const Icon(Icons.nearby_off),
+            title: const Text('近いデバイスと連携'),
+            onTap: () {
+              Navigator.push(context, DebugNearbyDevicePage.route());
             },
           ),
           _ListTile(

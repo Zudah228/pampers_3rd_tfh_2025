@@ -1,4 +1,4 @@
-import 'package:app/core/app/providers/models/push_notification_type.dart';
+import 'package:app/core/app/providers/push_notifications/models/push_notification_type.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:meta/meta.dart';
 
