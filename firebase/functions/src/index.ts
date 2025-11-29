@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase-admin/app"
 import { getFirestore } from "firebase-admin/firestore"
 import { getStorage } from "firebase-admin/storage"
-import * as functions from "firebase-functions"
+import * as functions from "firebase-functions/v2"
 
 initializeApp(functions.config().firebase)
 
@@ -12,6 +12,8 @@ firestore.settings({
 })
 
 const storage = getStorage()
+
+functions.setGlobalOptions({ region: "asia-northeast1" });
 
 export const saveFaceIds = functions.https.onCall(async (request) => {
     const { auth, data } = request
