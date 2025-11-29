@@ -1,4 +1,6 @@
 import 'package:app/core/app/components/button/primary_button.dart';
+import 'package:app/core/app/components/full_screen_loading_indicator.dart';
+import 'package:app/core/exceptions/message_exception.dart';
 import 'package:app/features/room/use_cases/join_room_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,7 +41,15 @@ class _RoomJoinCardState extends ConsumerState<RoomJoinCard> {
               SizedBox(height: 24),
               PrimaryButton(
                 onPressed: () {
-                  ref.read(joinRoomUseCaseProvider)(_controller.text);
+                  FullScreenLoadingIndicator.show(() async {
+                    final roomId = _controller.text.trim();
+
+                    if (roomId.isEmpty) {
+                      throw MessageException('ルームIDを入力してください');
+                    }
+
+                    await ref.read(joinRoomUseCaseProvider)(roomId);
+                  });
                 },
                 child: Text('参加'),
               ),
