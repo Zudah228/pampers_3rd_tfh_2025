@@ -8,5 +8,7 @@ abstract final class FirestoreCollections {
   static const rooms = 'rooms';
   static String roomRelations(String userId) => '$users/$userId/related_rooms';
 
+  static const photos = 'photos';
+
   static const debug_items = 'debug/v1/items';
 }
