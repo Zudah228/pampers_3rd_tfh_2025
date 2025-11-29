@@ -34,6 +34,7 @@ class BottomSheetScaffold extends StatelessWidget {
           else
             SizedBox(height: 16),
           Flexible(child: child),
+          SizedBox(height: MediaQuery.viewInsetsOf(context).bottom),
         ],
       ),
     );
