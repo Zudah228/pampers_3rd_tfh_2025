@@ -39,6 +39,8 @@ dependencies:
   extended_image: ^10.0.1
   image: ^4.5.4
   path: ^1.9.1
+  firebase_messaging: ^16.0.4
+  flutter_local_notifications: ^19.5.0
 
 dev_dependencies:
   flutter_test:
