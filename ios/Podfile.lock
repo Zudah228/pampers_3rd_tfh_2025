@@ -1,6 +1,12 @@
 PODS:
+  - camera_avfoundation (0.0.1):
+    - Flutter
   - cloud_firestore (6.1.0):
     - Firebase/Firestore (= 12.5.0)
+    - firebase_core
+    - Flutter
+  - cloud_functions (6.0.4):
+    - Firebase/Functions (= 12.5.0)
     - firebase_core
     - Flutter
   - Firebase/Auth (12.5.0):
@@ -11,6 +17,12 @@ PODS:
   - Firebase/Firestore (12.5.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 12.5.0)
+  - Firebase/Functions (12.5.0):
+    - Firebase/CoreOnly
+    - FirebaseFunctions (~> 12.5.0)
+  - Firebase/Messaging (12.5.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 12.5.0)
   - Firebase/Storage (12.5.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 12.5.0)
@@ -20,6 +32,10 @@ PODS:
     - Flutter
   - firebase_core (4.2.1):
     - Firebase/CoreOnly (= 12.5.0)
+    - Flutter
+  - firebase_messaging (16.0.4):
+    - Firebase/Messaging (= 12.5.0)
+    - firebase_core
     - Flutter
   - firebase_storage (13.0.4):
     - Firebase/Storage (= 12.5.0)
@@ -65,6 +81,29 @@ PODS:
     - FirebaseFirestoreGRPCCPPBinary (= 1.69.0)
     - leveldb-library (~> 1.22)
     - nanopb (~> 3.30910.0)
+  - FirebaseFunctions (12.5.0):
+    - FirebaseAppCheckInterop (~> 12.5.0)
+    - FirebaseAuthInterop (~> 12.5.0)
+    - FirebaseCore (~> 12.5.0)
+    - FirebaseCoreExtension (~> 12.5.0)
+    - FirebaseMessagingInterop (~> 12.5.0)
+    - FirebaseSharedSwift (~> 12.5.0)
+    - GTMSessionFetcher/Core (< 6.0, >= 3.4)
+  - FirebaseInstallations (12.5.0):
+    - FirebaseCore (~> 12.5.0)
+    - GoogleUtilities/Environment (~> 8.1)
+    - GoogleUtilities/UserDefaults (~> 8.1)
+    - PromisesObjC (~> 2.4)
+  - FirebaseMessaging (12.5.0):
+    - FirebaseCore (~> 12.5.0)
+    - FirebaseInstallations (~> 12.5.0)
+    - GoogleDataTransport (~> 10.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.1)
+    - GoogleUtilities/Environment (~> 8.1)
+    - GoogleUtilities/Reachability (~> 8.1)
+    - GoogleUtilities/UserDefaults (~> 8.1)
+    - nanopb (~> 3.30910.0)
+  - FirebaseMessagingInterop (12.5.0)
   - FirebaseSharedSwift (12.5.0)
   - FirebaseStorage (12.5.0):
     - FirebaseAppCheckInterop (~> 12.5.0)
@@ -79,6 +118,9 @@ PODS:
     - Mantle
     - SDWebImage
     - SDWebImageWebPCoder
+  - GoogleDataTransport (10.1.0):
+    - nanopb (~> 3.30910.0)
+    - PromisesObjC (~> 2.4)
   - GoogleUtilities/AppDelegateSwizzler (8.1.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -98,6 +140,9 @@ PODS:
     - GoogleUtilities/Privacy
   - GoogleUtilities/Privacy (8.1.0)
   - GoogleUtilities/Reachability (8.1.0):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/UserDefaults (8.1.0):
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
   - GTMSessionFetcher/Core (5.0.0)
@@ -130,6 +175,7 @@ PODS:
     - Flutter
   - permission_handler_apple (9.3.0):
     - Flutter
+  - PromisesObjC (2.4.0)
   - RecaptchaInterop (101.0.0)
   - SDWebImage (5.21.3):
     - SDWebImage/Core (= 5.21.3)
@@ -137,6 +183,8 @@ PODS:
   - SDWebImageWebPCoder (0.15.0):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.17)
+  - share_plus (0.0.1):
+    - Flutter
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -144,9 +192,12 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
+  - cloud_functions (from `.symlinks/plugins/cloud_functions/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
+  - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `12.5.0`)
   - Flutter (from `Flutter`)
@@ -155,6 +206,7 @@ DEPENDENCIES:
   - objective_c (from `.symlinks/plugins/objective_c/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+  - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
@@ -173,25 +225,37 @@ SPEC REPOS:
     - FirebaseFirestoreGRPCCoreBinary
     - FirebaseFirestoreGRPCCPPBinary
     - FirebaseFirestoreInternalBinary
+    - FirebaseFunctions
+    - FirebaseInstallations
+    - FirebaseMessaging
+    - FirebaseMessagingInterop
     - FirebaseSharedSwift
     - FirebaseStorage
+    - GoogleDataTransport
     - GoogleUtilities
     - GTMSessionFetcher
     - leveldb-library
     - libwebp
     - Mantle
     - nanopb
+    - PromisesObjC
     - RecaptchaInterop
     - SDWebImage
     - SDWebImageWebPCoder
 
 EXTERNAL SOURCES:
+  camera_avfoundation:
+    :path: ".symlinks/plugins/camera_avfoundation/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
+  cloud_functions:
+    :path: ".symlinks/plugins/cloud_functions/ios"
   firebase_auth:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
+  firebase_messaging:
+    :path: ".symlinks/plugins/firebase_messaging/ios"
   firebase_storage:
     :path: ".symlinks/plugins/firebase_storage/ios"
   FirebaseFirestore:
@@ -209,6 +273,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info_plus/ios"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
+  share_plus:
+    :path: ".symlinks/plugins/share_plus/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   url_launcher_ios:
@@ -220,10 +286,13 @@ CHECKOUT OPTIONS:
     :tag: 12.5.0
 
 SPEC CHECKSUMS:
+  camera_avfoundation: 281867ff09f1da66f031a184ecfbc6f2e625c9f5
   cloud_firestore: 017d04e4e602f8258c30b87787e0055a049113c3
+  cloud_functions: 57141f588aa21172a9616e6b027bf379779ce1b3
   Firebase: f51524e7ea4aa63c6fdaa32543f4c2e8c0cda770
   firebase_auth: d9fce4134554638a882e53d2e2a0afe3b9b2970d
   firebase_core: 48673fabb097936cddd4c8d416d6b377a355cf7b
+  firebase_messaging: e1e9a02e9061bafe43e725c3fadf0570683dd4ce
   firebase_storage: 7aa456a6adc559da087db2d15bda64df3c9cc40a
   FirebaseAppCheckInterop: 263b97ab0773bf4728dc1b346a953e1ade84f931
   FirebaseAuth: f1ca4b4d56639af209fb5489d02e15734322b974
@@ -238,10 +307,15 @@ SPEC CHECKSUMS:
   FirebaseFirestoreGRPCCoreBinary: 565534e160a0415d12185f7f171c52a567382fbd
   FirebaseFirestoreGRPCCPPBinary: 6c0134e8d230ee58b9d51dec2a30a48efd6d5dc7
   FirebaseFirestoreInternalBinary: e89dccad14ab246808b6ef21a4d9c499b156a42f
+  FirebaseFunctions: 105db2763737925c8170ee147d1f2d6851686127
+  FirebaseInstallations: a3208cb8ada31c7cc3e69d8fa9653561d9861169
+  FirebaseMessaging: f846ef1e23a13063ced500338ed604aeb5e26b07
+  FirebaseMessagingInterop: df5f396516c947df5ac9d9ecc0658f4a4471bb3d
   FirebaseSharedSwift: 9a96c0a083dad9cf12b9b2787a1fc9dda6470860
   FirebaseStorage: b25a3b57a4257fb4f754d5798a88d6af752dd3ef
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   flutter_image_compress_common: ec1d45c362c9d30a3f6a0426c297f47c52007e3e
+  GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
   GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
   GTMSessionFetcher: 02d6e866e90bc236f48a703a041dfe43e6221a29
   image_picker_ios: 4f2f91b01abdb52842a8e277617df877e40f905b
@@ -252,12 +326,14 @@ SPEC CHECKSUMS:
   objective_c: 77e887b5ba1827970907e10e832eec1683f3431d
   package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
+  PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
   SDWebImage: 16309af6d214ba3f77a7c6f6fdda888cb313a50a
   SDWebImageWebPCoder: 0e06e365080397465cc73a7a9b472d8a3bd0f377
+  share_plus: 8b6f8b3447e494cca5317c8c3073de39b3600d1f
   shared_preferences_foundation: 5086985c1d43c5ba4d5e69a4e8083a389e2909e6
   url_launcher_ios: bb13df5870e8c4234ca12609d04010a21be43dfa
 
-PODFILE CHECKSUM: ab18668f95e87bd3a7a2be77c2dbbf97b9de8970
+PODFILE CHECKSUM: 6747d37475dd2680435033c930c453a296036e7d
 
 COCOAPODS: 1.16.2
