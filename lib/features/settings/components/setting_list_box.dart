@@ -21,7 +21,7 @@ class SettingListBox extends StatelessWidget {
       child: Column(
         children: children.separatedWith(
           Divider(
-            color: themeData.colorScheme.outlineVariant,
+            color: themeData.colorScheme.outline,
             height: 1,
           ),
         ),

@@ -58,7 +58,7 @@ class SettingsPage extends ConsumerWidget {
                 },
               ),
               _ListTile(
-                leading: Icon(Icons.bug_report, color: Colors.green[200]),
+                leading: Icon(Icons.bug_report),
                 title: const Text('デバッグ'),
                 onTap: () {
                   Navigator.of(context).push(DebugPage.route());
@@ -114,9 +114,11 @@ class _ListTile extends StatelessWidget {
       child: ListTile(
         minVerticalPadding: 8,
         title: title,
-        titleTextStyle: TextStyle(
-          color: foregroundColor ?? Theme.of(context).colorScheme.onSurface,
-        ),
+        titleTextStyle: foregroundColor != null
+            ? TextStyle(
+                color: foregroundColor,
+              )
+            : null,
         leading: leading != null
             ? IconTheme.merge(
                 data: IconThemeData(color: foregroundColor),
