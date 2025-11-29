@@ -16,6 +16,9 @@ abstract class Room with _$Room {
     required int currentCount,
     @CreatedAtTimestampConverter() DateTime? createdAt,
     @UpdatedAtTimestampConverter() DateTime? updatedAt,
+    @JsonKey(includeFromJson: false, includeToJson: false)
+    @Default(true)
+    bool enabled,
   }) = _Room;
 
   const Room._();

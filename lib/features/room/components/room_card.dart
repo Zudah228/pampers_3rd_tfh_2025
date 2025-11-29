@@ -1,5 +1,11 @@
+import 'package:app/core/app/components/button/error_button.dart';
 import 'package:app/core/app/components/snack_bar.dart';
+import 'package:app/core/service/firebase_firestore/firebase_firestore_service.dart';
+import 'package:app/core/service/firebase_firestore/models/firestore_collections.dart';
+import 'package:app/core/utils/riverpod/extensions.dart';
+import 'package:app/features/auth/providers/current_user_provider.dart';
 import 'package:app/features/room/models/room.dart';
+import 'package:app/features/room/models/room_relation.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,6 +22,27 @@ class RoomCard extends StatelessWidget {
     final themeData = Theme.of(context);
     final textTheme = themeData.textTheme;
 
+    Future<void> exitRoom() async {
+      final firestore = context
+          .read(firebaseFirestoreServiceProvider)
+          .firestore;
+      final userId = context.read(currentUserProvider).id;
+      if (userId == null) {
+        return;
+      }
+
+      await firestore
+          .collection(
+            FirestoreCollections.roomRelations(userId),
+          )
+          .doc(room.id)
+          .update({
+            RoomRelationKeys.enabled: false,
+          });
+
+      showSnackBar(message: 'ルームから退出しました');
+    }
+
     return Card(
       child: Padding(
         padding: EdgeInsets.all(16),
@@ -25,13 +52,26 @@ class RoomCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (room.name case final name?) ...[
-                Text(
-                  name,
-                  style: textTheme.titleMedium,
-                ),
-                SizedBox(height: 8),
-              ],
+              Row(
+                children: [
+                  if (room.name case final name?) ...[
+                    Expanded(
+                      child: Text(
+                        name,
+                        style: textTheme.titleMedium,
+                      ),
+                    ),
+                  ] else
+                    Spacer(),
+                  SizedBox(width: 8),
+
+                  ErrorButton.small(
+                    onPressed: exitRoom,
+                    child: Text('退出'),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
               Text(DateFormat.yMEd().format(room.createdAt ?? clock.now())),
               SizedBox(height: 8),
               TextFormField(
