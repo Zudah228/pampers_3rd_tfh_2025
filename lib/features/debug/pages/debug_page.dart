@@ -1,7 +1,6 @@
 import 'package:app/core/app/components/route_animations/route_animations.dart';
 import 'package:app/core/app/components/separator.dart';
 import 'package:app/features/debug/pages/debug_components_page.dart';
-import 'package:app/features/debug/pages/debug_fcm_page.dart';
 import 'package:app/features/debug/pages/debug_firebase_page.dart';
 import 'package:app/features/debug_firestore/pages/debug_firestore_pagination_page.dart';
 import 'package:app/features/debug_form/pages/debug_form_page.dart';
@@ -62,13 +61,6 @@ class DebugPage extends StatelessWidget {
             title: const Text('Firestore ページネーション'),
             onTap: () {
               Navigator.push(context, DebugFirestorePaginationPage.route());
-            },
-          ),
-          _ListTile(
-            leading: const Icon(Icons.cloud_upload),
-            title: const Text('FCMトークン'),
-            onTap: () {
-              Navigator.push(context, DebugFcmPage.route());
             },
           ),
         ].separatedWith(const SizedBox(height: 16)),
