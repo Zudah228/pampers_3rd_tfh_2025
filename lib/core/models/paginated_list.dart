@@ -73,19 +73,8 @@ class _PaginatedList<T> extends PaginatedList<T> {
 
   @override
   PaginatedList<T> append(PaginatedList<T> list) {
-    final allItems = [...items, ...list.items];
-
-    /// 順序を保ちつつ重複を取り除く
-    final seen = <T>{};
-    final uniqueItems = <T>[];
-    for (final item in allItems) {
-      if (seen.add(item)) {
-        uniqueItems.add(item);
-      }
-    }
-
     return _PaginatedList<T>(
-      items: uniqueItems,
+      items: [...items, ...list.items],
       hasMore: list.hasMore,
     );
   }
