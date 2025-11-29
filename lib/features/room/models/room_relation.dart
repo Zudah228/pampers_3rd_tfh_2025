@@ -10,7 +10,7 @@ abstract class RoomRelation with _$RoomRelation {
   const factory RoomRelation({
     required String id,
     required String userId,
-    @Default(false)
+    @Default(true)
     bool enabled,
     @CreatedAtTimestampConverter() DateTime? createdAt,
     @UpdatedAtTimestampConverter() DateTime? updatedAt,
