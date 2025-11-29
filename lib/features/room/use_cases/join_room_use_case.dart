@@ -39,7 +39,7 @@ class JoinRoomUseCase {
 
       final currentCount = room.currentCount + 1;
 
-      if (currentCount >= room.maxCount) {
+      if (currentCount > room.maxCount) {
         throw MessageException('ルームの制限を超えています');
       }
 
