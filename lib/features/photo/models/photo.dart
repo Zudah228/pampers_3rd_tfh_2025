@@ -26,6 +26,6 @@ typedef PhotoKeys = _$PhotoJsonKeys;
 extension PhotoFirestoreExtension on CollectionReference<Map<String, dynamic>> {
   CollectionReference<Photo> get withPhotoConverter => withConverter<Photo>(
     fromFirestore: (snapshot, _) => Photo.fromJson(snapshot.data()!),
-    toFirestore: (user, _) => user.toJson(),
+    toFirestore: (photo, _) => photo.toJson(),
   );
 }
