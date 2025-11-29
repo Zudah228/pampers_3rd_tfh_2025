@@ -7,6 +7,10 @@
     - **Bad:** `MemberList` → **Good:** `MemberListSliver`
     - **Bad:** `Home` → **Good:** `HomePage`
 
+## 色の定義は ColorScheme を使う
+`AppColors` を直接使わず、`Theme.of(context).colorScheme` を利用する。
+マテリアルでカバーできない場合は、`ExpandedColorScheme` に値を追加する。
+
 ## ウィジェット引数として、表示するためだけの String、IconData は使わない
 
 ### ❌ NG
