@@ -43,6 +43,7 @@ dependencies:
   flutter_local_notifications: ^19.5.0
   flutter_nearby_connections: ^1.1.2
   device_info: ^2.0.3
+  google_mlkit_face_detection: ^0.13.1
 
 dev_dependencies:
   flutter_test:
