@@ -29,7 +29,7 @@
       "extension ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}FirestoreExtension on CollectionReference<Map<String, dynamic>> {",
       "  CollectionReference<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}> get with${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Converter => withConverter<${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}>(",
       "    fromFirestore: (snapshot, _) => ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}.fromJson(snapshot.data()!),",
-      "    toFirestore: (user, _) => user.toJson(),",
+      "    toFirestore: (${TM_FILENAME_BASE/(.*)/${1:/camelcase}/}, _) => ${TM_FILENAME_BASE/(.*)/${1:/camelcase}/}.toJson(),",
       "  );",
       "}",
       "",
