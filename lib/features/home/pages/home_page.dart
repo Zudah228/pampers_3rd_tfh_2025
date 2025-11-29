@@ -1,51 +1,23 @@
-import 'package:app/core/app/components/route_animations/route_animations.dart';
-import 'package:app/features/home/providers/main_tab_provider.dart';
-import 'package:app/features/settings/pages/settings_page.dart';
+import 'package:app/features/room/components/my_room_card.dart';
+import 'package:app/features/room/components/room_create_card.dart';
+import 'package:app/features/room/providers/my_room_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+/// ホームページへの遷移は、HomePageShell を使用
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
-  static const routeName = '/home';
-
-  static Route<void> route() {
-    return RouteAnimations.swipeBack<void>(
-      settings: const RouteSettings(name: routeName),
-      builder: (_) => const HomePage(),
-    );
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mainTab = ref.watch(mainTabProvider);
+    final myRoom = ref.watch(myRoomProvider).value;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(mainTab.label),
-      ),
-      body: IndexedStack(
-        index: mainTab.index,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
         children: [
-          const Center(child: Text('HomePage')),
-          const SettingsPage(),
+          if (myRoom == null) RoomCreateCard() else MyRoomCard(room: myRoom),
         ],
-      ),
-      bottomNavigationBar: NavigationBar(
-        destinations: [
-          NavigationDestination(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-        ],
-        onDestinationSelected: (index) {
-          ref.read(mainTabProvider.notifier).state = MainTab.values[index];
-        },
-        selectedIndex: mainTab.index,
       ),
     );
   }

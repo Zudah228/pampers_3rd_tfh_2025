@@ -121,7 +121,7 @@ class DebugComponentsPage extends StatelessWidget {
                   ErrorButton(
                     child: const Text('Show Error Snackbar'),
                     onPressed: () {
-                      showErrorSnackBar(message: 'Error Snackbar');
+                      showErrorSnackBar(error: 'Error Snackbar');
                     },
                   ),
                 ],
