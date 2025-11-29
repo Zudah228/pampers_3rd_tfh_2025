@@ -1,5 +1,7 @@
+import 'package:app/core/app/components/layout/layout.dart';
 import 'package:app/features/room/components/room_card.dart';
 import 'package:app/features/room/components/room_create_card.dart';
+import 'package:app/features/room/components/room_join_card.dart';
 import 'package:app/features/room/providers/my_room_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,8 +17,19 @@ class HomePage extends ConsumerWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (myRoom == null) RoomCreateCard() else RoomCard(room: myRoom),
+          if (myRoom == null) ...[
+            Headline2(child: Text('ルームを作成')),
+            Body(
+              children: [
+                RoomCreateCard(),
+              ],
+            ),
+            Headline2(child: Text('ルームに参加')),
+            Body(children: [RoomJoinCard()]),
+          ] else
+            RoomCard(room: myRoom),
         ],
       ),
     );
