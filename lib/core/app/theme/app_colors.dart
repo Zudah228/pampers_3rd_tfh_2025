@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 class AppColors {
+  AppColors._();
   // プライマリーカラー
   static const Color sunsetGold = Color(0xFFD4A574);
   static const Color warmHoney = Color(0xFFE5BC8F);
