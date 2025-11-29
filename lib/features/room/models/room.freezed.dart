@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Room {
 
- String get id; String get createdBy; String? get name; String? get keyFilePath; int get maxCount; int get currentCount;@CreatedAtTimestampConverter() DateTime? get createdAt;@UpdatedAtTimestampConverter() DateTime? get updatedAt;
+ String get id; String get createdBy; String? get name; String? get keyFilePath; int get maxCount; int get currentCount;@CreatedAtTimestampConverter() DateTime? get createdAt;@UpdatedAtTimestampConverter() DateTime? get updatedAt;@JsonKey(includeFromJson: false, includeToJson: false) bool get enabled;
 /// Create a copy of Room
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $RoomCopyWith<Room> get copyWith => _$RoomCopyWithImpl<Room>(this as Room, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Room&&(identical(other.id, id) || other.id == id)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.name, name) || other.name == name)&&(identical(other.keyFilePath, keyFilePath) || other.keyFilePath == keyFilePath)&&(identical(other.maxCount, maxCount) || other.maxCount == maxCount)&&(identical(other.currentCount, currentCount) || other.currentCount == currentCount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Room&&(identical(other.id, id) || other.id == id)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.name, name) || other.name == name)&&(identical(other.keyFilePath, keyFilePath) || other.keyFilePath == keyFilePath)&&(identical(other.maxCount, maxCount) || other.maxCount == maxCount)&&(identical(other.currentCount, currentCount) || other.currentCount == currentCount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.enabled, enabled) || other.enabled == enabled));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,createdBy,name,keyFilePath,maxCount,currentCount,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,createdBy,name,keyFilePath,maxCount,currentCount,createdAt,updatedAt,enabled);
 
 @override
 String toString() {
-  return 'Room(id: $id, createdBy: $createdBy, name: $name, keyFilePath: $keyFilePath, maxCount: $maxCount, currentCount: $currentCount, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'Room(id: $id, createdBy: $createdBy, name: $name, keyFilePath: $keyFilePath, maxCount: $maxCount, currentCount: $currentCount, createdAt: $createdAt, updatedAt: $updatedAt, enabled: $enabled)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $RoomCopyWith<$Res>  {
   factory $RoomCopyWith(Room value, $Res Function(Room) _then) = _$RoomCopyWithImpl;
 @useResult
 $Res call({
- String id, String createdBy, String? name, String? keyFilePath, int maxCount, int currentCount,@CreatedAtTimestampConverter() DateTime? createdAt,@UpdatedAtTimestampConverter() DateTime? updatedAt
+ String id, String createdBy, String? name, String? keyFilePath, int maxCount, int currentCount,@CreatedAtTimestampConverter() DateTime? createdAt,@UpdatedAtTimestampConverter() DateTime? updatedAt,@JsonKey(includeFromJson: false, includeToJson: false) bool enabled
 });
 
 
@@ -65,7 +65,7 @@ class _$RoomCopyWithImpl<$Res>
 
 /// Create a copy of Room
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? createdBy = null,Object? name = freezed,Object? keyFilePath = freezed,Object? maxCount = null,Object? currentCount = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? createdBy = null,Object? name = freezed,Object? keyFilePath = freezed,Object? maxCount = null,Object? currentCount = null,Object? createdAt = freezed,Object? updatedAt = freezed,Object? enabled = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,createdBy: null == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
@@ -75,7 +75,8 @@ as String?,maxCount: null == maxCount ? _self.maxCount : maxCount // ignore: cas
 as int,currentCount: null == currentCount ? _self.currentCount : currentCount // ignore: cast_nullable_to_non_nullable
 as int,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+as DateTime?,enabled: null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -160,10 +161,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String createdBy,  String? name,  String? keyFilePath,  int maxCount,  int currentCount, @CreatedAtTimestampConverter()  DateTime? createdAt, @UpdatedAtTimestampConverter()  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String createdBy,  String? name,  String? keyFilePath,  int maxCount,  int currentCount, @CreatedAtTimestampConverter()  DateTime? createdAt, @UpdatedAtTimestampConverter()  DateTime? updatedAt, @JsonKey(includeFromJson: false, includeToJson: false)  bool enabled)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Room() when $default != null:
-return $default(_that.id,_that.createdBy,_that.name,_that.keyFilePath,_that.maxCount,_that.currentCount,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.createdBy,_that.name,_that.keyFilePath,_that.maxCount,_that.currentCount,_that.createdAt,_that.updatedAt,_that.enabled);case _:
   return orElse();
 
 }
@@ -181,10 +182,10 @@ return $default(_that.id,_that.createdBy,_that.name,_that.keyFilePath,_that.maxC
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String createdBy,  String? name,  String? keyFilePath,  int maxCount,  int currentCount, @CreatedAtTimestampConverter()  DateTime? createdAt, @UpdatedAtTimestampConverter()  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String createdBy,  String? name,  String? keyFilePath,  int maxCount,  int currentCount, @CreatedAtTimestampConverter()  DateTime? createdAt, @UpdatedAtTimestampConverter()  DateTime? updatedAt, @JsonKey(includeFromJson: false, includeToJson: false)  bool enabled)  $default,) {final _that = this;
 switch (_that) {
 case _Room():
-return $default(_that.id,_that.createdBy,_that.name,_that.keyFilePath,_that.maxCount,_that.currentCount,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.createdBy,_that.name,_that.keyFilePath,_that.maxCount,_that.currentCount,_that.createdAt,_that.updatedAt,_that.enabled);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -201,10 +202,10 @@ return $default(_that.id,_that.createdBy,_that.name,_that.keyFilePath,_that.maxC
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String createdBy,  String? name,  String? keyFilePath,  int maxCount,  int currentCount, @CreatedAtTimestampConverter()  DateTime? createdAt, @UpdatedAtTimestampConverter()  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String createdBy,  String? name,  String? keyFilePath,  int maxCount,  int currentCount, @CreatedAtTimestampConverter()  DateTime? createdAt, @UpdatedAtTimestampConverter()  DateTime? updatedAt, @JsonKey(includeFromJson: false, includeToJson: false)  bool enabled)?  $default,) {final _that = this;
 switch (_that) {
 case _Room() when $default != null:
-return $default(_that.id,_that.createdBy,_that.name,_that.keyFilePath,_that.maxCount,_that.currentCount,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.createdBy,_that.name,_that.keyFilePath,_that.maxCount,_that.currentCount,_that.createdAt,_that.updatedAt,_that.enabled);case _:
   return null;
 
 }
@@ -216,7 +217,7 @@ return $default(_that.id,_that.createdBy,_that.name,_that.keyFilePath,_that.maxC
 @JsonSerializable()
 
 class _Room extends Room {
-  const _Room({required this.id, required this.createdBy, required this.name, required this.keyFilePath, required this.maxCount, required this.currentCount, @CreatedAtTimestampConverter() this.createdAt, @UpdatedAtTimestampConverter() this.updatedAt}): super._();
+  const _Room({required this.id, required this.createdBy, required this.name, required this.keyFilePath, required this.maxCount, required this.currentCount, @CreatedAtTimestampConverter() this.createdAt, @UpdatedAtTimestampConverter() this.updatedAt, @JsonKey(includeFromJson: false, includeToJson: false) this.enabled = true}): super._();
   factory _Room.fromJson(Map<String, dynamic> json) => _$RoomFromJson(json);
 
 @override final  String id;
@@ -227,6 +228,7 @@ class _Room extends Room {
 @override final  int currentCount;
 @override@CreatedAtTimestampConverter() final  DateTime? createdAt;
 @override@UpdatedAtTimestampConverter() final  DateTime? updatedAt;
+@override@JsonKey(includeFromJson: false, includeToJson: false) final  bool enabled;
 
 /// Create a copy of Room
 /// with the given fields replaced by the non-null parameter values.
@@ -241,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Room&&(identical(other.id, id) || other.id == id)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.name, name) || other.name == name)&&(identical(other.keyFilePath, keyFilePath) || other.keyFilePath == keyFilePath)&&(identical(other.maxCount, maxCount) || other.maxCount == maxCount)&&(identical(other.currentCount, currentCount) || other.currentCount == currentCount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Room&&(identical(other.id, id) || other.id == id)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.name, name) || other.name == name)&&(identical(other.keyFilePath, keyFilePath) || other.keyFilePath == keyFilePath)&&(identical(other.maxCount, maxCount) || other.maxCount == maxCount)&&(identical(other.currentCount, currentCount) || other.currentCount == currentCount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.enabled, enabled) || other.enabled == enabled));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,createdBy,name,keyFilePath,maxCount,currentCount,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,createdBy,name,keyFilePath,maxCount,currentCount,createdAt,updatedAt,enabled);
 
 @override
 String toString() {
-  return 'Room(id: $id, createdBy: $createdBy, name: $name, keyFilePath: $keyFilePath, maxCount: $maxCount, currentCount: $currentCount, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'Room(id: $id, createdBy: $createdBy, name: $name, keyFilePath: $keyFilePath, maxCount: $maxCount, currentCount: $currentCount, createdAt: $createdAt, updatedAt: $updatedAt, enabled: $enabled)';
 }
 
 
@@ -261,7 +263,7 @@ abstract mixin class _$RoomCopyWith<$Res> implements $RoomCopyWith<$Res> {
   factory _$RoomCopyWith(_Room value, $Res Function(_Room) _then) = __$RoomCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String createdBy, String? name, String? keyFilePath, int maxCount, int currentCount,@CreatedAtTimestampConverter() DateTime? createdAt,@UpdatedAtTimestampConverter() DateTime? updatedAt
+ String id, String createdBy, String? name, String? keyFilePath, int maxCount, int currentCount,@CreatedAtTimestampConverter() DateTime? createdAt,@UpdatedAtTimestampConverter() DateTime? updatedAt,@JsonKey(includeFromJson: false, includeToJson: false) bool enabled
 });
 
 
@@ -278,7 +280,7 @@ class __$RoomCopyWithImpl<$Res>
 
 /// Create a copy of Room
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? createdBy = null,Object? name = freezed,Object? keyFilePath = freezed,Object? maxCount = null,Object? currentCount = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? createdBy = null,Object? name = freezed,Object? keyFilePath = freezed,Object? maxCount = null,Object? currentCount = null,Object? createdAt = freezed,Object? updatedAt = freezed,Object? enabled = null,}) {
   return _then(_Room(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,createdBy: null == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
@@ -288,7 +290,8 @@ as String?,maxCount: null == maxCount ? _self.maxCount : maxCount // ignore: cas
 as int,currentCount: null == currentCount ? _self.currentCount : currentCount // ignore: cast_nullable_to_non_nullable
 as int,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+as DateTime?,enabled: null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
