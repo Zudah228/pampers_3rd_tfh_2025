@@ -1,4 +1,4 @@
-import 'package:app/features/room/components/my_room_card.dart';
+import 'package:app/features/room/components/room_card.dart';
 import 'package:app/features/room/components/room_create_card.dart';
 import 'package:app/features/room/providers/my_room_provider.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ class HomePage extends ConsumerWidget {
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
-          if (myRoom == null) RoomCreateCard() else MyRoomCard(room: myRoom),
+          if (myRoom == null) RoomCreateCard() else RoomCard(room: myRoom),
         ],
       ),
     );

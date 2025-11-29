@@ -10,6 +10,8 @@ abstract class Room with _$Room {
   const factory Room({
     required String id,
     required String createdBy,
+    required String? name,
+    required String? keyFilePath,
     required int maxCount,
     required int currentCount,
     @CreatedAtTimestampConverter() DateTime? createdAt,
