@@ -26,7 +26,7 @@ class _RoomJoinCardState extends ConsumerState<RoomJoinCard> {
       child: SizedBox(
         width: double.infinity,
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
