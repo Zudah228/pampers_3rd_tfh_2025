@@ -72,7 +72,7 @@ export const compareFaces = functions.https.onCall(async (request) => {
     functions.logger.info(`downloaded ${filePath}`)
 
     const users = await firestore.collectionGroup("related_rooms")
-    .where("room_id", "==", roomId).get()
+    .where("id", "==", roomId).get()
 
     const hasUsers = users.docs.length > 0
     const userIds = users.docs
