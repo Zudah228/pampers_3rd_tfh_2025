@@ -24,14 +24,22 @@ class HomePage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (myRoom == null) ...[
-              Headline2(child: Text('ルームを作成')),
-              Body(
-                children: [
-                  RoomCreateCard(),
-                ],
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Body(
+                        children: [
+                          RoomCreateCard(),
+                        ],
+                      ),
+
+                      Body(children: [RoomJoinCard()]),
+                    ],
+                  ),
+                ),
               ),
-              Headline2(child: Text('ルームに参加')),
-              Body(children: [RoomJoinCard()]),
             ] else ...[
               Expanded(
                 child: SingleChildScrollView(

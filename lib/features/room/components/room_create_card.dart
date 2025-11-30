@@ -40,7 +40,7 @@ class _RoomCreateCardState extends ConsumerState<RoomCreateCard> {
                 child: TextField(
                   controller: _controller,
                   decoration: InputDecoration(
-                    hintText: '名前を入力してください',
+                    hintText: 'ルーム名を入力してください',
                   ),
                 ),
               ),
