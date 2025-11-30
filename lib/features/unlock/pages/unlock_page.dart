@@ -1,19 +1,25 @@
 import 'package:app/core/app/components/button/primary_button.dart';
-import 'package:app/core/app/components/form/image/image_field.dart';
 import 'package:app/core/app/components/full_screen_loading_indicator.dart';
 import 'package:app/core/app/components/route_animations/route_animations.dart';
+import 'package:app/core/app/components/snack_bar.dart';
 import 'package:app/features/photo/pages/album_page.dart';
+import 'package:app/features/room/use_cases/compare_faces_use_case.dart';
 import 'package:app/features/unlock/providers/unlock_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UnlockPage extends ConsumerStatefulWidget {
-  const UnlockPage({super.key});
+  const UnlockPage({super.key, required this.roomId});
+
+  final String roomId;
+
   static const routeName = '/unlock';
-  static Route<void> route() {
+
+  static Route<void> route(String roomId) {
     return RouteAnimations.swipeBack<void>(
       settings: const RouteSettings(name: routeName),
-      builder: (_) => const UnlockPage(),
+      builder: (_) => UnlockPage(roomId: roomId),
     );
   }
 
@@ -147,17 +153,24 @@ class _UnlockPageState extends ConsumerState<UnlockPage>
                 backgroundColor: const Color(0xFFC9A882),
                 foregroundColor: Colors.white,
                 onPressed: () async {
-                  final image = await showImagePicker(context);
-                  if (image == null) return;
+                  // カメラで直接撮影
+                  final pickedImage = await ImagePicker().pickImage(
+                    source: ImageSource.camera,
+                  );
+                  if (pickedImage == null) return;
 
-                  // TODO: 撮影した画像を処理する。
-                  // 画像の解析を行い、二人が写っているかどうかを判断する。
-                  // 二人が本人かどうかの解析を行う
-                  // 解析が成功した場合は、ロック解除する。
-                  // 解析が失敗した場合は、エラーメッセージを表示する。
+                  final image = await pickedImage.readAsBytes();
 
-                  //現在は画像投稿されたかのみを判定
                   await FullScreenLoadingIndicator.show(() async {
+                    final checked = await ref.read(compareFacesUseCaseProvider)(
+                      data: image,
+                      roomId: widget.roomId,
+                    );
+
+                    if (!checked) {
+                      showErrorSnackBar(error: '違う人が写っていますね');
+                      return;
+                    }
                     await ref.read(unlockProvider).unlock(image);
                   });
 
