@@ -6,8 +6,8 @@ enum MainTab {
   ;
 
   String get label => switch (this) {
-    home => 'Home',
-    settings => 'Settings',
+    home => 'ホーム画面',
+    settings => '設定画面',
   };
 }
 
