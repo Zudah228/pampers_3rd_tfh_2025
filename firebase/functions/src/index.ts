@@ -78,7 +78,7 @@ export const compareFaces = functions.https.onCall(async (request) => {
             const avatarPath = imagePath.data()?.avatar_path
             if (!avatarPath) {
                 throw new functions.https.HttpsError(
-                    "resource-exhausted",
+                    "invalid-argument",
                     "avatar_path が設定されていないユーザーがいます"
                 )
             }
