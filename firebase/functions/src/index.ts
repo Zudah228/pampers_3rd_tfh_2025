@@ -14,7 +14,7 @@ firestore.settings({
 
 const storage = getStorage()
 
-functions.setGlobalOptions({ region: "asia-northeast1", secrets: ["AWS_SECRET_KEY", "AWS_PUBLIC_KEY"] })
+functions.setGlobalOptions({ region: "asia-northeast1", secrets: ["AWS_SECRET_ACCESS_KEY", "AWS_ACCESS_KEY_ID"] })
 
 const download = async (filePath: string): Promise<Buffer> => {
     const [response] = await storage.bucket().file(filePath).get()
@@ -23,19 +23,21 @@ const download = async (filePath: string): Promise<Buffer> => {
     return Buffer.from(buffer)
 }
 
-const secretAccessKey = functions.params.defineSecret("AWS_SECRET_KEY").value()
-const accessKeyId = functions.params.defineSecret("AWS_PUBLIC_KEY").value()
+const getAws = () => {
+    const secretAccessKey = functions.params.defineSecret("AWS_SECRET_ACCESS_KEY").value()
+    const accessKeyId = functions.params.defineSecret("AWS_ACCESS_KEY_ID").value()
 
-aws.config.update({
-    accessKeyId,
-    secretAccessKey,
-    region: "us-east-1",
-})
+    aws.config.update({
+        accessKeyId,
+        secretAccessKey,
+        region: "us-east-1",
+    })
 
-const awsRekognition = new aws.Rekognition()
+    return new aws.Rekognition()
+}
 
 const _compareFaces = async (sourceImage: Buffer, targetImage: Buffer) => {
-    const response = await awsRekognition
+    const response = await getAws()
         .compareFaces({
             SourceImage: {
                 Bytes: sourceImage,
