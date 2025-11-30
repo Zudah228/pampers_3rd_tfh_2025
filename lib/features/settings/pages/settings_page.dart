@@ -1,4 +1,5 @@
 import 'package:app/core/app/app_state.dart';
+import 'package:app/core/app/components/dialog/confirm_dialog.dart';
 import 'package:app/core/app/components/route_animations/route_animations.dart';
 import 'package:app/core/service/firebase_auth/firebase_auth_service.dart';
 import 'package:app/core/service/package_info/package_info_service.dart';
@@ -69,8 +70,13 @@ class SettingsPage extends ConsumerWidget {
                   foregroundColor: Theme.of(context).colorScheme.error,
                   leading: Icon(Icons.exit_to_app),
                   title: Text('ログアウト'),
-                  onTap: () {
-                    ref.read(firebaseAuthServiceProvider).signOut();
+                  onTap: () async {
+                    if (await showConfirmDialog(
+                      context,
+                      title: Text('ログアウトしますか？'),
+                    )) {
+                      await ref.read(firebaseAuthServiceProvider).signOut();
+                    }
                   },
                 )
               else

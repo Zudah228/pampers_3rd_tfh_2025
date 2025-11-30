@@ -54,12 +54,14 @@ class _CustomBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+    final colorScheme = themeData.colorScheme;
+
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.cream,
         border: Border(
           top: BorderSide(
-            color: AppColors.lightBeige,
+            color: colorScheme.outline,
             width: 1,
           ),
         ),
@@ -130,7 +132,7 @@ class _NavigationItem extends StatelessWidget {
                   bottom: 0,
                   child: Icon(
                     icon,
-                    color: AppColors.white,
+                    color: colorScheme.onPrimary,
                     size: 24,
                   ),
                 ),
