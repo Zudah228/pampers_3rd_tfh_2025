@@ -60,7 +60,7 @@ class HomePage extends ConsumerWidget {
                           onTap: () {
                             Navigator.push(
                               context,
-                              UnlockPage.route(),
+                              UnlockPage.route(myRoom.id),
                             );
                           },
                           child: Row(
