@@ -7,7 +7,7 @@ import 'package:app/features/unlock/providers/unlock_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UnlockPage extends ConsumerWidget {
+class UnlockPage extends ConsumerStatefulWidget {
   const UnlockPage({super.key});
   static const routeName = '/unlock';
   static Route<void> route() {
@@ -18,7 +18,90 @@ class UnlockPage extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<UnlockPage> createState() => _UnlockPageState();
+}
+
+class _UnlockPageState extends ConsumerState<UnlockPage>
+    with TickerProviderStateMixin {
+  late AnimationController _fadeController;
+  late AnimationController _scaleController;
+  late AnimationController _rotateController;
+  late Animation<double> _fadeAnimation;
+  late Animation<double> _scaleAnimation;
+  late Animation<double> _rotateAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // フェードインアニメーション
+    _fadeController = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+    _fadeAnimation =
+        Tween<double>(
+          begin: 0.0,
+          end: 1.0,
+        ).animate(
+          CurvedAnimation(
+            parent: _fadeController,
+            curve: Curves.easeInOut,
+          ),
+        );
+
+    // スケールアニメーション
+    _scaleController = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
+    _scaleAnimation =
+        Tween<double>(
+          begin: 0.5,
+          end: 1.0,
+        ).animate(
+          CurvedAnimation(
+            parent: _scaleController,
+            curve: Curves.elasticOut,
+          ),
+        );
+
+    // 回転アニメーション
+    _rotateController = AnimationController(
+      duration: const Duration(milliseconds: 1200),
+      vsync: this,
+    );
+    _rotateAnimation =
+        Tween<double>(
+          begin: 0.0,
+          end: 1.0,
+        ).animate(
+          CurvedAnimation(
+            parent: _rotateController,
+            curve: Curves.easeInOut,
+          ),
+        );
+
+    // アニメーション開始
+    _startAnimations();
+  }
+
+  void _startAnimations() {
+    _fadeController.forward();
+    _scaleController.forward();
+    _rotateController.forward();
+  }
+
+  @override
+  void dispose() {
+    _fadeController.dispose();
+    _scaleController.dispose();
+    _rotateController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       // TODO: appbarをCustomAppBarに変更
       appBar: AppBar(
@@ -31,51 +114,29 @@ class UnlockPage extends ConsumerWidget {
             // 中央のイラスト
             Expanded(
               child: Center(
-                child: Container(
-                  width: 200,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF6B7C8C),
-                    borderRadius: BorderRadius.circular(32),
-                  ),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      // 写真のイラスト
-                      Positioned(
-                        right: 40,
-                        bottom: 50,
+                child: AnimatedBuilder(
+                  animation: Listenable.merge([
+                    _fadeAnimation,
+                    _scaleAnimation,
+                    _rotateAnimation,
+                  ]),
+                  builder: (context, child) {
+                    return FadeTransition(
+                      opacity: _fadeAnimation,
+                      child: Transform.scale(
+                        scale: _scaleAnimation.value,
                         child: Transform.rotate(
-                          angle: 0.1,
-                          child: Container(
-                            width: 100,
-                            height: 80,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFB8A08A),
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: const Color(0xFFE8DCC8),
-                                width: 8,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 50,
-                        top: 60,
-                        child: Transform.rotate(
-                          angle: -0.3,
+                          angle: _rotateAnimation.value * 0.1,
                           child: Image.asset(
                             'assets/app_icons/app_icon.png',
-                            width: 60,
-                            height: 60,
+                            width: 200,
+                            height: 200,
                             fit: BoxFit.contain,
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
               ),
             ),
