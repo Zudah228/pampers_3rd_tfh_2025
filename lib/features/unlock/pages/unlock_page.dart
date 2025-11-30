@@ -2,6 +2,7 @@ import 'package:app/core/app/components/button/primary_button.dart';
 import 'package:app/core/app/components/form/image/image_field.dart';
 import 'package:app/core/app/components/full_screen_loading_indicator.dart';
 import 'package:app/core/app/components/route_animations/route_animations.dart';
+import 'package:app/features/photo/pages/album_page.dart';
 import 'package:app/features/unlock/providers/unlock_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -100,7 +101,7 @@ class UnlockPage extends ConsumerWidget {
                   });
 
                   if (!context.mounted) return;
-                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.of(context).push(AlbumPage.route());
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

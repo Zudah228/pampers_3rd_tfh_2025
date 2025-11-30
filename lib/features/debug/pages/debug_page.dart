@@ -5,6 +5,7 @@ import 'package:app/features/debug/pages/debug_firebase_page.dart';
 import 'package:app/features/debug_firestore/pages/debug_firestore_pagination_page.dart';
 import 'package:app/features/debug_form/pages/debug_form_page.dart';
 import 'package:app/features/debug_mlkit/pages/debug_mlkit_face_detection_page.dart';
+import 'package:app/features/photo/pages/album_page.dart';
 import 'package:app/features/unlock/pages/unlock_page.dart';
 import 'package:flutter/material.dart';
 
@@ -69,6 +70,13 @@ class DebugPage extends StatelessWidget {
             title: const Text('ロック解除'),
             onTap: () {
               Navigator.push(context, UnlockPage.route());
+            },
+          ),
+          _ListTile(
+            leading: const Icon(Icons.photo_album),
+            title: const Text('アルバム'),
+            onTap: () {
+              Navigator.push(context, AlbumPage.route());
             },
           ),
         ].separatedWith(const SizedBox(height: 16)),
