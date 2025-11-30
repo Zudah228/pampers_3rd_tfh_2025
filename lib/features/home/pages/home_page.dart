@@ -1,4 +1,5 @@
 import 'package:app/core/app/components/layout/layout.dart';
+import 'package:app/core/app/components/unfocused_gesture_detecter.dart';
 import 'package:app/features/photo/components/add_photo.dart';
 import 'package:app/features/room/components/room_create_card.dart';
 import 'package:app/features/room/components/room_join_card.dart';
@@ -14,23 +15,26 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final myRoom = ref.watch(myRoomProvider).value;
 
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (myRoom == null) ...[
-                  RoomCreateCard(),
-              Body(children: [RoomJoinCard()]),
-            ] else ...[
-              Body(
-                children: [
-                  AddPhoto(),
-                ],
-              ),
+    return UnfocusedGestureDetecter(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (myRoom == null) ...[
+                RoomCreateCard(),
+                SizedBox(height: 48),
+                RoomJoinCard(),
+              ] else ...[
+                Body(
+                  children: [
+                    AddPhoto(),
+                  ],
+                ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );
