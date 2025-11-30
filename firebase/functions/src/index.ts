@@ -23,6 +23,15 @@ const download = async (filePath: string): Promise<Buffer> => {
   return Buffer.from(buffer);
 };
 
+const secretAccessKey = functions.params.defineSecret("AWS_SECRET_KEY").value();
+const accessKeyId = functions.params.defineSecret("AWS_PUBLIC_KEY").value();
+
+aws.config.update({
+  accessKeyId,
+  secretAccessKey,
+  region: "us-east-1",
+});
+
 const awsRekognition = new aws.Rekognition();
 
 const _compareFaces = async (sourceImage: Buffer, targetImage: Buffer) => {
