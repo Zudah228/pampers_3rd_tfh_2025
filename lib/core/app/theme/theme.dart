@@ -91,11 +91,18 @@ abstract final class AppThemeData {
       ),
 
       bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: colorScheme.surface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             top: SmoothRadius(cornerRadius: 16, cornerSmoothing: 0.2),
           ),
         ),
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: colorScheme.surface,
+        selectedItemColor: colorScheme.primary,
+        unselectedItemColor: colorScheme.onSurfaceVariant,
+        showUnselectedLabels: true,
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,

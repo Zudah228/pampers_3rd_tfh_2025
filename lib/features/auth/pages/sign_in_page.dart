@@ -3,6 +3,7 @@ import 'package:app/core/app/components/button/primary_button.dart';
 import 'package:app/core/app/components/button/secondary_button.dart';
 import 'package:app/core/app/components/form/field_decorator.dart';
 import 'package:app/core/app/components/form/form_validator.dart';
+import 'package:app/core/app/components/form/obscure_toggle_button.dart';
 import 'package:app/core/app/components/full_screen_loading_indicator.dart';
 import 'package:app/core/app/components/unfocused_gesture_detecter.dart';
 import 'package:app/features/auth/providers/current_user_provider.dart';
@@ -28,6 +29,7 @@ class SignInPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
+    final obscureTextNotifier = useState(true);
 
     return UnfocusedGestureDetecter(
       child: BottomSheetScaffold(
@@ -55,7 +57,16 @@ class SignInPage extends HookConsumerWidget {
                   label: Text('パスワード'),
                   child: TextFormField(
                     controller: passwordController,
-                    obscureText: true,
+                    obscureText: obscureTextNotifier.value,
+                    decoration: InputDecoration(
+                      suffixIcon: ObscureToggleButton(
+                        obscureText: obscureTextNotifier.value,
+                        onPressed: () {
+                          obscureTextNotifier.value =
+                              !obscureTextNotifier.value;
+                        },
+                      ),
+                    ),
                     validator: ValidationBuilder.create(
                       (builder) => builder..required(),
                     ),
@@ -75,7 +86,7 @@ class SignInPage extends HookConsumerWidget {
                                   email: emailController.text,
                                   password: passwordController.text,
                                 );
-      
+
                             if (context.mounted) {
                               Navigator.of(context).pop();
                             }
@@ -95,7 +106,7 @@ class SignInPage extends HookConsumerWidget {
                                   email: emailController.text,
                                   password: passwordController.text,
                                 );
-      
+
                             if (context.mounted) {
                               Navigator.of(context).pop();
                             }
