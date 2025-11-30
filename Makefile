@@ -4,3 +4,5 @@ generate_app_icon:
 	fvm dart run flutter_launcher_icons
 rename_app_name:
 	fvm dart rename_app:main 
+add_firebase_options:
+	flutterfire configure -p pampers-3rd-app-tfh-2025 -o="lib/core/service/firebase/options/lib/firebase_options.dart" --ios-bundle-id="dev.tfh2025.myaku"

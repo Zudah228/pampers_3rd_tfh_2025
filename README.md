@@ -15,6 +15,12 @@
 
 ## ディレクトリ構成
 
+## 環境設定
+firebase の設定ファイルを gitignore しているので、こちらで make コマンドで生成する必要があります。
+
+```
+make add_firebase_options
+```
 
 ## GitHub のルール
 ### ブランチ管理
