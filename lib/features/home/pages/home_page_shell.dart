@@ -1,8 +1,12 @@
+import 'package:app/core/app/components/custom_app_bar.dart';
 import 'package:app/core/app/components/route_animations/route_animations.dart';
 import 'package:app/core/app/theme/app_colors.dart';
 import 'package:app/features/home/pages/home_page.dart';
 import 'package:app/features/home/providers/main_tab_provider.dart';
+import 'package:app/features/room/providers/my_room_provider.dart';
+import 'package:app/features/room/providers/room_members_provider.dart';
 import 'package:app/features/settings/pages/settings_page.dart';
+import 'package:app/features/user/components/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -21,11 +25,32 @@ class HomePageShell extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final mainTab = ref.watch(mainTabProvider);
+    final myRoom = ref.watch(myRoomProvider).value;
+    final currentUser = ref.watch(currentUserInfoProvider).value;
+    final partnerUser = ref.watch(partnerUserProvider).value;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(mainTab.label),
-      ),
+      appBar: myRoom == null || mainTab == MainTab.settings
+          ? AppBar(title: Text(mainTab.label))
+          : CustomAppBar(
+              title: myRoom.name ?? 'ルーム名読み込み中',
+              child: Row(
+                children: [
+                  // 自分のアバターを表示
+                  UserAvatar(
+                    user: currentUser,
+                    radius: 24,
+                  ),
+                  SizedBox(width: 4),
+                  // パートナーのアバターを表示
+                  UserAvatar(
+                    user: partnerUser,
+                    radius: 24,
+                  ),
+                ],
+              ),
+            ),
+
       body: IndexedStack(
         index: mainTab.index,
         children: [
