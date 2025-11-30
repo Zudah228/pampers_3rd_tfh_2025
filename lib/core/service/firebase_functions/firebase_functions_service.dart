@@ -19,7 +19,9 @@ class FirebaseFunctionsService {
     Map<String, dynamic>? parameters,
   ]) async {
     final result = await _functions
-        .httpsCallable(functionName)
+        .httpsCallable(functionName, options: HttpsCallableOptions(
+          timeout: const Duration(seconds: 30),
+        ))
         .call<Map<String, dynamic>>(parameters);
 
     return _castMap(result.data)! as Map<String, dynamic>;
