@@ -2,6 +2,7 @@ import 'package:app/core/app/components/button/primary_button.dart';
 import 'package:app/core/app/components/form/image/image_field.dart';
 import 'package:app/core/app/components/full_screen_loading_indicator.dart';
 import 'package:app/core/app/components/route_animations/route_animations.dart';
+import 'package:app/features/photo/pages/album_page.dart';
 import 'package:app/features/unlock/providers/unlock_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -60,50 +61,16 @@ class UnlockPage extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      //TODO:鍵のイラストに置き換える
                       Positioned(
                         left: 50,
                         top: 60,
                         child: Transform.rotate(
                           angle: -0.3,
-                          child: Column(
-                            children: [
-                              // リボン
-                              Container(
-                                width: 40,
-                                height: 30,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF8B9AA8),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                              // 鍵の本体
-                              Container(
-                                width: 20,
-                                height: 60,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF5A6B7A),
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      width: 12,
-                                      height: 8,
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFF5A6B7A),
-                                        border: Border.all(
-                                          color: const Color(0xFF8B9AA8),
-                                          width: 2,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 4),
-                                  ],
-                                ),
-                              ),
-                            ],
+                          child: Image.asset(
+                            'assets/app_icons/app_icon.png',
+                            width: 60,
+                            height: 60,
+                            fit: BoxFit.contain,
                           ),
                         ),
                       ),
@@ -134,7 +101,7 @@ class UnlockPage extends ConsumerWidget {
                   });
 
                   if (!context.mounted) return;
-                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.of(context).push(AlbumPage.route());
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
