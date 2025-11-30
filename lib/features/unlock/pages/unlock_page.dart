@@ -161,18 +161,20 @@ class _UnlockPageState extends ConsumerState<UnlockPage>
 
                   final image = await pickedImage.readAsBytes();
 
+                  bool checked = true;
                   await FullScreenLoadingIndicator.show(() async {
-                    final checked = await ref.read(compareFacesUseCaseProvider)(
+                    checked = await ref.read(compareFacesUseCaseProvider)(
                       data: image,
                       roomId: widget.roomId,
                     );
 
-                    if (!checked) {
-                      showErrorSnackBar(error: '違う人が写っていますね');
-                      return;
-                    }
                     await ref.read(unlockProvider).unlock(image);
                   });
+
+                  if (!checked) {
+                    showErrorSnackBar(error: '違う人が写っていますね');
+                    return;
+                  }
 
                   if (!context.mounted) return;
                   Navigator.of(context).push(AlbumPage.route());
