@@ -1,6 +1,5 @@
 import 'package:app/core/app/components/route_animations/route_animations.dart';
 import 'package:app/core/app/components/separator.dart';
-import 'package:app/features/debug/pages/debug_compare_faces_page.dart';
 import 'package:app/features/debug/pages/debug_components_page.dart';
 import 'package:app/features/debug/pages/debug_firebase_page.dart';
 import 'package:app/features/debug_firestore/pages/debug_firestore_pagination_page.dart';
@@ -62,13 +61,6 @@ class DebugPage extends StatelessWidget {
             title: const Text('Firestore ページネーション'),
             onTap: () {
               Navigator.push(context, DebugFirestorePaginationPage.route());
-            },
-          ),
-          _ListTile(
-            leading: const Icon(Icons.face),
-            title: Text('顔比較関数'),
-            onTap: () {
-              Navigator.push(context, DebugCompareFacesPage.route());
             },
           ),
         ].separatedWith(const SizedBox(height: 16)),
