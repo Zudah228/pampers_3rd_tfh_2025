@@ -14,12 +14,12 @@ firestore.settings({
 
 const storage = getStorage()
 
-functions.setGlobalOptions({ region: "asia-northeast1" })
+functions.setGlobalOptions({ region: "asia-northeast1", secrets: ["AWS_SECRET_KEY", "AWS_PUBLIC_KEY"] })
 
 const download = async (filePath: string): Promise<Buffer> => {
-    const response = await storage.bucket().file(filePath).get()
-    const bufferResponse = await response[0].download()
-    const buffer = bufferResponse[0].buffer
+    const [response] = await storage.bucket().file(filePath).get()
+    const [bufferResponse] = await response.download()
+    const buffer = bufferResponse.buffer
     return Buffer.from(buffer)
 }
 
@@ -66,8 +66,10 @@ export const compareFaces = functions.https.onCall(async (request) => {
 
     const groupImage = await download(filePath)
 
-    const members = await firestore.collectionGroup("related_rooms").where("room_id", "==", roomId).get()
-    const userIds = members.docs
+    const users = await firestore.collectionGroup("related_rooms").where("room_id", "==", roomId).get()
+
+    const hasUsers = users.docs.length > 0
+    const userIds = users.docs
         .map((doc) => doc.data()?.user_id)
         .filter((userId): userId is string => typeof userId === "string")
 
@@ -94,9 +96,11 @@ export const compareFaces = functions.https.onCall(async (request) => {
     )
 
     // すべてのユーザーが顔が、１人以上と一致しているかどうかを判断
-    const success = compareFacesResponses.every((response) =>
+    const allMatched = compareFacesResponses.every((response) =>
         response.FaceMatches ? response.FaceMatches.length > 0 : false
     )
+
+    const success = allMatched && hasUsers
     return {
         success,
     }
