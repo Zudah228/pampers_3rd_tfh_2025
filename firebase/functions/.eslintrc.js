@@ -23,7 +23,7 @@ module.exports = {
     "jest.config.js",
     "babel.config.js",
   ],
-  plugins: ["@typescript-eslint", "import", "unused-imports", "prettier", "jsdoc", "prefer-arrow"],
+  plugins: ["@typescript-eslint", "import", "unused-imports", "prettier", "prefer-arrow"],
   rules: {
     // default linter
     // error rules
@@ -121,29 +121,6 @@ module.exports = {
 
     // unused-import
     "unused-imports/no-unused-imports": "warn",
-
-    // jsdoc
-    "jsdoc/require-jsdoc": [
-      "warn",
-      {
-        publicOnly: { esm: true, cjs: true },
-        require: {
-          ArrowFunctionExpression: false,
-          ClassDeclaration: true,
-          ClassExpression: false,
-          FunctionDeclaration: false,
-          FunctionExpression: false,
-          MethodDefinition: false,
-        },
-        contexts: ["TSInterfaceDeclaration"],
-      },
-    ],
-    "jsdoc/require-description": [
-      "warn",
-      {
-        contexts: ["PropertyDefinition", "TSInterfaceDeclaration"],
-      },
-    ],
 
     // prefer-arrow
     // アロー関数を強制させるために導入
