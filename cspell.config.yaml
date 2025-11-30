@@ -20,6 +20,7 @@ ignorePaths:
   - "lib/**/firebase_options_*.dart"
   - "build"
   - ".metadata"
+  - "firebase_options.dart"
 ignoreRegExpList:
   - "/#[0-9A-Fa-f]{8}/g"
   - "/\\b[0-9A-Fa-f]{8}\\b/g"
