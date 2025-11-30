@@ -43,6 +43,7 @@ const _compareFaces = async (sourceImage: Buffer, targetImage: Buffer) => {
       TargetImage: {
         Bytes: targetImage,
       },
+      SimilarityThreshold: 80,
     })
     .promise();
 
