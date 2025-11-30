@@ -4,7 +4,9 @@ import 'package:app/core/app/theme/app_colors.dart';
 import 'package:app/features/home/pages/home_page.dart';
 import 'package:app/features/home/providers/main_tab_provider.dart';
 import 'package:app/features/room/providers/my_room_provider.dart';
+import 'package:app/features/room/providers/room_members_provider.dart';
 import 'package:app/features/settings/pages/settings_page.dart';
+import 'package:app/features/user/components/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,6 +26,8 @@ class HomePageShell extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final mainTab = ref.watch(mainTabProvider);
     final myRoom = ref.watch(myRoomProvider).value;
+    final currentUser = ref.watch(currentUserInfoProvider).value;
+    final partnerUser = ref.watch(partnerUserProvider).value;
 
     return Scaffold(
       appBar: myRoom == null || mainTab == MainTab.settings
@@ -32,20 +36,16 @@ class HomePageShell extends ConsumerWidget {
               title: myRoom.name ?? 'ルーム名読み込み中',
               child: Row(
                 children: [
-                  // TODO: 自分のアバターを表示
-                  CircleAvatar(
+                  // 自分のアバターを表示
+                  UserAvatar(
+                    user: currentUser,
                     radius: 24,
-                    backgroundImage: NetworkImage(
-                      'https://plus.unsplash.com/premium_photo-1675200124904-dfadce24119f?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                    ),
                   ),
                   SizedBox(width: 4),
-                  // TODO: パートナーのアバターを表示
-                  CircleAvatar(
+                  // パートナーのアバターを表示
+                  UserAvatar(
+                    user: partnerUser,
                     radius: 24,
-                    backgroundImage: NetworkImage(
-                      'https://plus.unsplash.com/premium_photo-1675200124904-dfadce24119f?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                    ),
                   ),
                 ],
               ),
