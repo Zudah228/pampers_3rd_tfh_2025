@@ -1,4 +1,3 @@
-import 'package:app/core/app/app_state.dart';
 import 'package:app/core/app/components/dialog/confirm_dialog.dart';
 import 'package:app/core/app/components/route_animations/route_animations.dart';
 import 'package:app/core/service/firebase_auth/firebase_auth_service.dart';
@@ -29,7 +28,7 @@ class SettingsPage extends ConsumerWidget {
           SizedBox(height: 16),
           SettingListBox(
             children: [
-              _ThemeModeButton(),
+              // _ThemeModeButton(),
               if (isAuthenticated)
                 _ListTile(
                   leading: const Icon(Icons.person),
@@ -104,6 +103,7 @@ class _ListTile extends StatelessWidget {
     required this.onTap,
     this.foregroundColor,
     this.leading,
+    // ignore: unused_element_parameter
     this.subtitle,
   });
 
@@ -138,76 +138,76 @@ class _ListTile extends StatelessWidget {
   }
 }
 
-class _ThemeModeButton extends StatelessWidget {
-  const _ThemeModeButton();
+// class _ThemeModeButton extends StatelessWidget {
+//   const _ThemeModeButton();
 
-  @override
-  Widget build(BuildContext context) {
-    final appState = AppState.of(context);
+//   @override
+//   Widget build(BuildContext context) {
+//     final appState = AppState.of(context);
 
-    return PopupMenuButton<ThemeMode>(
-      position: PopupMenuPosition.under,
-      initialValue: appState.themeMode,
-      tooltip: 'テーマを変更します',
-      itemBuilder: (context) => [
-        PopupMenuItem(
-          value: ThemeMode.light,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            spacing: 8,
-            children: [
-              Icon(Icons.light_mode),
-              Text('ライトモード'),
-            ],
-          ),
-        ),
-        PopupMenuItem(
-          value: ThemeMode.dark,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            spacing: 8,
-            children: [
-              Icon(Icons.dark_mode),
-              Text('ダークモード'),
-            ],
-          ),
-        ),
-        PopupMenuItem(
-          value: ThemeMode.system,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            spacing: 8,
-            children: [
-              Icon(Icons.monitor),
-              Text('システム'),
-            ],
-          ),
-        ),
-      ],
-      onSelected: (value) {
-        appState.updateThemeMode(value);
-      },
-      child: Builder(
-        builder: (context) {
-          return _ListTile(
-            leading: Icon(switch (Theme.of(context).brightness) {
-              Brightness.light => Icons.light_mode,
-              Brightness.dark => Icons.dark_mode,
-            }),
-            title: const Text('テーマ'),
-            subtitle: Text(switch (appState.themeMode) {
-              ThemeMode.light => 'ライトモード',
-              ThemeMode.dark => 'ダークモード',
-              ThemeMode.system => 'システムに従っています',
-            }),
-            onTap: () {
-              context
-                  .findAncestorStateOfType<PopupMenuButtonState<ThemeMode>>()
-                  ?.showButtonMenu();
-            },
-          );
-        },
-      ),
-    );
-  }
-}
+//     return PopupMenuButton<ThemeMode>(
+//       position: PopupMenuPosition.under,
+//       initialValue: appState.themeMode,
+//       tooltip: 'テーマを変更します',
+//       itemBuilder: (context) => [
+//         PopupMenuItem(
+//           value: ThemeMode.light,
+//           child: Row(
+//             crossAxisAlignment: CrossAxisAlignment.end,
+//             spacing: 8,
+//             children: [
+//               Icon(Icons.light_mode),
+//               Text('ライトモード'),
+//             ],
+//           ),
+//         ),
+//         PopupMenuItem(
+//           value: ThemeMode.dark,
+//           child: Row(
+//             crossAxisAlignment: CrossAxisAlignment.end,
+//             spacing: 8,
+//             children: [
+//               Icon(Icons.dark_mode),
+//               Text('ダークモード'),
+//             ],
+//           ),
+//         ),
+//         PopupMenuItem(
+//           value: ThemeMode.system,
+//           child: Row(
+//             crossAxisAlignment: CrossAxisAlignment.end,
+//             spacing: 8,
+//             children: [
+//               Icon(Icons.monitor),
+//               Text('システム'),
+//             ],
+//           ),
+//         ),
+//       ],
+//       onSelected: (value) {
+//         appState.updateThemeMode(value);
+//       },
+//       child: Builder(
+//         builder: (context) {
+//           return _ListTile(
+//             leading: Icon(switch (Theme.of(context).brightness) {
+//               Brightness.light => Icons.light_mode,
+//               Brightness.dark => Icons.dark_mode,
+//             }),
+//             title: const Text('テーマ'),
+//             subtitle: Text(switch (appState.themeMode) {
+//               ThemeMode.light => 'ライトモード',
+//               ThemeMode.dark => 'ダークモード',
+//               ThemeMode.system => 'システムに従っています',
+//             }),
+//             onTap: () {
+//               context
+//                   .findAncestorStateOfType<PopupMenuButtonState<ThemeMode>>()
+//                   ?.showButtonMenu();
+//             },
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }

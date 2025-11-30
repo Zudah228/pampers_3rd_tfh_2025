@@ -1,4 +1,3 @@
-import 'package:app/core/app/app_state.dart';
 import 'package:app/core/app/components/full_screen_loading_indicator.dart';
 import 'package:app/core/app/components/splash/splash_screen.dart';
 import 'package:app/core/app/global_keys.dart';
@@ -26,10 +25,8 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    final appState = AppState.of(context);
-
     return MaterialApp(
-      themeMode: appState.themeMode,
+      themeMode: ThemeMode.light,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
