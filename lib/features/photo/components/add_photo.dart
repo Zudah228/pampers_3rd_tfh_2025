@@ -5,6 +5,7 @@ import 'package:app/core/app/components/form/image/image_field.dart';
 import 'package:app/core/app/components/form/image/image_field_value.dart';
 import 'package:app/core/app/components/full_screen_loading_indicator.dart';
 import 'package:app/core/app/components/layout/layout.dart';
+import 'package:app/core/app/components/snack_bar.dart';
 import 'package:app/core/app/theme/app_colors.dart';
 import 'package:app/core/exceptions/message_exception.dart';
 import 'package:app/features/photo/use_cases/add_photo_use_case.dart';
@@ -36,7 +37,6 @@ class _AddPhotoState extends ConsumerState<AddPhoto> {
     return Card(
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.cream,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: AppColors.lightBeige,
@@ -133,10 +133,7 @@ class _AddPhotoState extends ConsumerState<AddPhoto> {
                                   _isLoading = false;
                                 });
                               } else {
-                                // その他のエラーはスナックバーを表示
-                                FullScreenLoadingIndicator.show(() async {
-                                  throw e;
-                                });
+                                showErrorSnackBar(error: e);
                                 setState(() {
                                   _isLoading = false;
                                 });

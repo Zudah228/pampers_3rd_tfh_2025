@@ -273,15 +273,17 @@ class _PhotoItem extends ConsumerWidget {
                           begin: Alignment.bottomCenter,
                           end: Alignment.topCenter,
                           colors: [
-                            Colors.black.withOpacity(0.7),
-                            Colors.black.withOpacity(0.3),
+                            Colors.black.withValues(alpha: 0.7),
+                            Colors.black.withValues(alpha: 0.3),
                             Colors.transparent,
                           ],
                           stops: const [0.0, 0.5, 1.0],
                         )
                       : null,
                   color: photo == null
-                      ? Theme.of(context).colorScheme.surface.withOpacity(0.9)
+                      ? Theme.of(
+                          context,
+                        ).colorScheme.surface.withValues(alpha: 0.9)
                       : null,
                   border: photo == null
                       ? Border(
@@ -346,7 +348,9 @@ class _UserAvatar extends ConsumerWidget {
       height: 40,
       decoration: BoxDecoration(
         color: hasPhoto
-            ? Colors.white.withOpacity(0.3)
+            ? Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3)
             : Theme.of(context).colorScheme.surfaceContainerHighest,
         shape: BoxShape.circle,
       ),

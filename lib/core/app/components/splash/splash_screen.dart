@@ -1,6 +1,7 @@
+import 'dart:async';
+
 import 'package:app/core/app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({
@@ -32,45 +33,48 @@ class _SplashScreenState extends State<SplashScreen>
       duration: const Duration(milliseconds: 800),
       vsync: this,
     );
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(
-      CurvedAnimation(
-        parent: _fadeController,
-        curve: Curves.easeInOut,
-      ),
-    );
+    _fadeAnimation =
+        Tween<double>(
+          begin: 0.0,
+          end: 1.0,
+        ).animate(
+          CurvedAnimation(
+            parent: _fadeController,
+            curve: Curves.easeInOut,
+          ),
+        );
 
     // スケールアニメーション
     _scaleController = AnimationController(
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
-    _scaleAnimation = Tween<double>(
-      begin: 0.5,
-      end: 1.0,
-    ).animate(
-      CurvedAnimation(
-        parent: _scaleController,
-        curve: Curves.elasticOut,
-      ),
-    );
+    _scaleAnimation =
+        Tween<double>(
+          begin: 0.5,
+          end: 1.0,
+        ).animate(
+          CurvedAnimation(
+            parent: _scaleController,
+            curve: Curves.elasticOut,
+          ),
+        );
 
     // 回転アニメーション
     _rotateController = AnimationController(
       duration: const Duration(milliseconds: 1200),
       vsync: this,
     );
-    _rotateAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(
-      CurvedAnimation(
-        parent: _rotateController,
-        curve: Curves.easeInOut,
-      ),
-    );
+    _rotateAnimation =
+        Tween<double>(
+          begin: 0.0,
+          end: 1.0,
+        ).animate(
+          CurvedAnimation(
+            parent: _rotateController,
+            curve: Curves.easeInOut,
+          ),
+        );
 
     // アニメーション開始
     _startAnimations();
@@ -123,7 +127,7 @@ class _SplashScreenState extends State<SplashScreen>
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.sunsetGold.withOpacity(0.3),
+                          color: AppColors.sunsetGold.withValues(alpha: 0.3),
                           blurRadius: 20,
                           spreadRadius: 5,
                         ),
@@ -144,4 +148,3 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 }
-
