@@ -26,7 +26,7 @@ class HomePageShell extends ConsumerWidget {
     final myRoom = ref.watch(myRoomProvider).value;
 
     return Scaffold(
-      appBar: myRoom == null
+      appBar: myRoom == null || mainTab == MainTab.settings
           ? AppBar(title: Text(mainTab.label))
           : CustomAppBar(
               title: myRoom.name ?? 'ルーム名読み込み中',
