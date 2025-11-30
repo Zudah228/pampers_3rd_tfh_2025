@@ -32,6 +32,8 @@ class CompareFacesUseCase {
       },
     );
 
-    return (result['success'] as bool);
+    print(result['success']);
+
+    return result['success'] as bool;
   }
 }

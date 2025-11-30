@@ -102,12 +102,14 @@ export const compareFaces = functions.https.onCall(async (request) => {
             return _compareFaces(userImage, groupImage)
         })
     )
+    functions.logger.info(compareFacesResponses)
 
     // すべてのユーザーが顔が、１人以上と一致しているかどうかを判断
     const allMatched = compareFacesResponses.every((response) =>
         response.FaceMatches ? response.FaceMatches.length > 0 : false
     )
 
+    functions.logger.info(allMatched)
     const success = allMatched && hasUsers
     return {
         success,
