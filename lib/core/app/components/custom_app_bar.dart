@@ -6,10 +6,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.title,
     this.child,
+    this.isBackButton = false,
   });
 
   final String title;
   final Widget? child;
+  final bool isBackButton;
 
   @override
   Size get preferredSize => const Size.fromHeight(80);
@@ -20,7 +22,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: AppColors.white,
       toolbarHeight: 80,
       leading: Padding(
-        padding: const EdgeInsets.only(left: 16),
+        padding: isBackButton
+            ? const EdgeInsets.only(left: 16)
+            : EdgeInsets.zero,
         child: Center(
           child: Container(
             width: 48,
@@ -29,11 +33,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               color: Colors.white,
               shape: BoxShape.circle,
             ),
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () => Navigator.of(context).pop(),
-              padding: EdgeInsets.zero,
-            ),
+            child: isBackButton
+                ? IconButton(
+                    icon: const Icon(Icons.arrow_back, color: Colors.black),
+                    onPressed: () => Navigator.of(context).pop(),
+                    padding: EdgeInsets.zero,
+                  )
+                : const SizedBox.shrink(),
           ),
         ),
       ),
@@ -53,7 +59,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
-      leadingWidth: 80,
     );
   }
 }
