@@ -57,7 +57,7 @@ class SignInPage extends HookConsumerWidget {
                   label: Text('パスワード'),
                   child: TextFormField(
                     controller: passwordController,
-                    obscureText: true,
+                    obscureText: obscureTextNotifier.value,
                     decoration: InputDecoration(
                       suffixIcon: ObscureToggleButton(
                         obscureText: obscureTextNotifier.value,
