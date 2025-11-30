@@ -23,29 +23,31 @@ final roomMembersProvider = StreamProvider.autoDispose<List<User>>((ref) {
       .where(RoomRelationKeys.enabled, isEqualTo: true)
       .snapshots()
       .asyncMap((snapshot) async {
-    final userIds = snapshot.docs
-        .map((doc) => doc.data()['user_id'] as String?)
-        .whereType<String>()
-        .toList();
+        final userIds = snapshot.docs
+            .map((doc) => doc.data()['user_id'] as String?)
+            .whereType<String>()
+            .toList();
 
-    if (userIds.isEmpty) {
-      return <User>[];
-    }
+        if (userIds.isEmpty) {
+          return <User>[];
+        }
 
-    // 各ユーザー情報を取得
-    final userDocs = await Future.wait(
-      userIds.map((userId) => firestore
-          .collection('users')
-          .withUserConverter
-          .doc(userId)
-          .get()),
-    );
+        // 各ユーザー情報を取得
+        final userDocs = await Future.wait(
+          userIds.map(
+            (userId) => firestore
+                .collection('users')
+                .withUserConverter
+                .doc(userId)
+                .get(),
+          ),
+        );
 
-    return userDocs
-        .where((doc) => doc.exists)
-        .map((doc) => doc.data()!)
-        .toList();
-  });
+        return userDocs
+            .where((doc) => doc.exists)
+            .map((doc) => doc.data()!)
+            .toList();
+      });
 });
 
 /// 現在のユーザー情報を取得するプロバイダー
@@ -83,4 +85,3 @@ final partnerUserProvider = StreamProvider.autoDispose<User?>((ref) {
 
   return Stream.value(partner);
 });
-

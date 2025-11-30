@@ -4,6 +4,7 @@ import 'package:app/features/photo/components/add_photo.dart';
 import 'package:app/features/room/components/room_create_card.dart';
 import 'package:app/features/room/components/room_join_card.dart';
 import 'package:app/features/room/providers/my_room_provider.dart';
+import 'package:app/features/unlock/pages/unlock_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -47,29 +48,37 @@ class HomePage extends ConsumerWidget {
                           ),
                         ),
                         padding: EdgeInsets.all(16),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'assets/app_icons/album_icon.png',
-                              width: 24,
-                              height: 24,
-                            ),
-                            const Spacer(),
-                            Text(
-                              '二人のアルバムを見る',
-                              style: TextStyle(
-                                color: AppColors.charcoal,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              UnlockPage.route(),
+                            );
+                          },
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'assets/app_icons/album_icon.png',
+                                width: 24,
+                                height: 24,
                               ),
-                            ),
-                            const Spacer(),
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              color: AppColors.sunsetGold,
-                              size: 16,
-                            ),
-                          ],
+                              const Spacer(),
+                              Text(
+                                '二人のアルバムを見る',
+                                style: TextStyle(
+                                  color: AppColors.charcoal,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              const Spacer(),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                color: AppColors.sunsetGold,
+                                size: 16,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
