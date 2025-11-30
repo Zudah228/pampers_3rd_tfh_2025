@@ -1,7 +1,6 @@
 import 'package:app/core/app/components/layout/layout.dart';
-import 'package:app/core/app/components/unfocused_gesture_detecter.dart';
+import 'package:app/core/app/theme/app_colors.dart';
 import 'package:app/features/photo/components/add_photo.dart';
-import 'package:app/features/room/components/room_card.dart';
 import 'package:app/features/room/components/room_create_card.dart';
 import 'package:app/features/room/components/room_join_card.dart';
 import 'package:app/features/room/providers/my_room_provider.dart';
@@ -16,27 +15,69 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final myRoom = ref.watch(myRoomProvider).value;
 
-    return UnfocusedGestureDetecter(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (myRoom == null) ...[
-                RoomCreateCard(),
-                SizedBox(height: 48),
-                RoomJoinCard(),
-              ] else ...[
-                Body(
-                  children: [
-                    RoomCard(room: myRoom),
-                    AddPhoto(),
-                  ],
+    return Scaffold(
+      backgroundColor: AppColors.cream,
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (myRoom == null) ...[
+              Headline2(child: Text('ルームを作成')),
+              Body(
+                children: [
+                  RoomCreateCard(),
+                ],
+              ),
+              Headline2(child: Text('ルームに参加')),
+              Body(children: [RoomJoinCard()]),
+            ] else ...[
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Body(
+                    children: [
+                      AddPhoto(),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: AppColors.lightBeige,
+                            width: 1,
+                          ),
+                        ),
+                        padding: EdgeInsets.all(16),
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              'assets/app_icons/album_icon.png',
+                              width: 24,
+                              height: 24,
+                            ),
+                            const Spacer(),
+                            Text(
+                              '二人のアルバムを見る',
+                              style: TextStyle(
+                                color: AppColors.charcoal,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const Spacer(),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: AppColors.sunsetGold,
+                              size: 16,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ],
-          ),
+          ],
         ),
       ),
     );
