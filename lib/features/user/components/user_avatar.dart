@@ -1,3 +1,6 @@
+import 'package:app/core/app/components/future/future_switcher.dart';
+import 'package:app/core/service/firebase_storage/firebase_storage_service.dart';
+import 'package:app/core/utils/riverpod/extensions.dart';
 import 'package:app/features/user/models/user.dart';
 import 'package:flutter/material.dart';
 
@@ -23,9 +26,18 @@ class UserAvatar extends StatelessWidget {
 
     // アバター画像がある場合
     if (user!.avatarPath != null && user!.avatarPath!.isNotEmpty) {
-      return CircleAvatar(
-        radius: radius,
-        backgroundImage: NetworkImage(user!.avatarPath!),
+      return FutureSwitcher(
+        fetch: () => context
+            .watch(firebaseStorageServiceProvider)
+            .getDownloadURL(user!.avatarPath!),
+        builder: (url) => CircleAvatar(
+          radius: radius,
+          backgroundImage: NetworkImage(url),
+        ),
+        errorBuilder: (error, stackTrace) => CircleAvatar(
+          radius: radius,
+          child: Icon(Icons.person, size: radius),
+        ),
       );
     }
 
