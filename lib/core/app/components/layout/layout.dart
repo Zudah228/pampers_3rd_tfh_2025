@@ -33,7 +33,7 @@ class Headline3 extends StatelessWidget {
         bottom: 8,
       ),
       child: DefaultTextStyle.merge(
-        style: Theme.of(context).textTheme.titleSmall!.merge(style),
+        style: Theme.of(context).textTheme.titleMedium!.merge(style),
         child: child,
       ),
     );

@@ -14,28 +14,24 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final myRoom = ref.watch(myRoomProvider).value;
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (myRoom == null) ...[
-            Headline2(child: Text('ルームを作成')),
-            Body(
-              children: [
-                RoomCreateCard(),
-              ],
-            ),
-            Headline2(child: Text('ルームに参加')),
-            Body(children: [RoomJoinCard()]),
-          ] else ...[
-            Body(
-              children: [
-                AddPhoto(),
-              ],
-            ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (myRoom == null) ...[
+                  RoomCreateCard(),
+              Body(children: [RoomJoinCard()]),
+            ] else ...[
+              Body(
+                children: [
+                  AddPhoto(),
+                ],
+              ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }

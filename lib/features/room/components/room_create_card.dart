@@ -1,9 +1,11 @@
 import 'dart:typed_data';
 
 import 'package:app/core/app/components/button/primary_button.dart';
+import 'package:app/core/app/components/form/field_decorator.dart';
 import 'package:app/core/app/components/form/image/image_field.dart';
 import 'package:app/core/app/components/form/image/image_field_value.dart';
 import 'package:app/core/app/components/full_screen_loading_indicator.dart';
+import 'package:app/core/app/components/layout/layout.dart';
 import 'package:app/core/exceptions/message_exception.dart';
 import 'package:app/features/room/use_cases/create_room_use_case.dart';
 import 'package:flutter/material.dart';
@@ -38,16 +40,20 @@ class _RoomCreateCardState extends ConsumerState<RoomCreateCard> {
       child: SizedBox(
         width: double.infinity,
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.all(24),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
+              Headline3(child: Text('ルーム作成')),
               SizedBox(height: 8),
-              TextField(
-                controller: _controller,
-                decoration: InputDecoration(
-                  hintText: '名前を入力してください',
+              FieldDecorator(
+                label: Text('ルーム名'),
+                child: TextField(
+                  controller: _controller,
+                  decoration: InputDecoration(
+                    hintText: '名前を入力してください',
+                  ),
                 ),
               ),
               SizedBox(height: 24),
