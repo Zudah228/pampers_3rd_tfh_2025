@@ -60,50 +60,16 @@ class UnlockPage extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      //TODO:鍵のイラストに置き換える
                       Positioned(
                         left: 50,
                         top: 60,
                         child: Transform.rotate(
                           angle: -0.3,
-                          child: Column(
-                            children: [
-                              // リボン
-                              Container(
-                                width: 40,
-                                height: 30,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF8B9AA8),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                              // 鍵の本体
-                              Container(
-                                width: 20,
-                                height: 60,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF5A6B7A),
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      width: 12,
-                                      height: 8,
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFF5A6B7A),
-                                        border: Border.all(
-                                          color: const Color(0xFF8B9AA8),
-                                          width: 2,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 4),
-                                  ],
-                                ),
-                              ),
-                            ],
+                          child: Image.asset(
+                            'assets/app_icons/app_icon.png',
+                            width: 60,
+                            height: 60,
+                            fit: BoxFit.contain,
                           ),
                         ),
                       ),
