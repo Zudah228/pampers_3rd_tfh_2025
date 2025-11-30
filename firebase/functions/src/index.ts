@@ -67,7 +67,9 @@ export const compareFaces = functions.https.onCall(async (request) => {
     const groupImage = await download(filePath)
 
     const members = await firestore.collectionGroup("related_rooms").where("room_id", "==", roomId).get()
-    const userIds = members.docs.map<string>((doc) => doc.data().user_id)
+    const userIds = members.docs
+        .map((doc) => doc.data()?.user_id)
+        .filter((userId): userId is string => typeof userId === "string")
 
     const userImages = await Promise.all(
         userIds.map(async (userId) => {
