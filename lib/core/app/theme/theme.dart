@@ -8,6 +8,7 @@ abstract final class AppThemeData {
   static ThemeData get light {
     final colorScheme = ColorScheme.fromSeed(
       seedColor: AppColors.sunsetGold,
+      primary: AppColors.sunsetGold,
       onPrimary: AppColors.white,
       onSurface: AppColors.slateGray,
       onSurfaceVariant: AppColors.charcoal,
