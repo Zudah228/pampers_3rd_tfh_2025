@@ -1,11 +1,7 @@
-import 'dart:typed_data';
-
 import 'package:app/core/exceptions/message_exception.dart';
 import 'package:app/core/service/firebase_auth/firebase_auth_service.dart';
 import 'package:app/core/service/firebase_firestore/firebase_firestore_service.dart';
 import 'package:app/core/service/firebase_firestore/models/firestore_collections.dart';
-import 'package:app/core/service/firebase_storage/firebase_storage_service.dart';
-import 'package:app/core/service/firebase_storage/storage_paths.dart';
 import 'package:app/features/room/models/room.dart';
 import 'package:app/features/room/models/room_relation.dart';
 import 'package:riverpod/riverpod.dart';
@@ -19,7 +15,6 @@ class CreateRoomUseCase {
   final Ref _ref;
 
   Future<Room> call({
-    required Uint8List data,
     required String? name,
     int maxCount = 2,
   }) async {
@@ -36,15 +31,10 @@ class CreateRoomUseCase {
         .doc();
     final roomId = roomDocumentReference.id;
 
-    final path = await _ref
-        .read(firebaseStorageServiceProvider)
-        .uploadImage(StoragePaths.room_key(roomId), data);
-
     final room = Room(
       id: roomId,
       createdBy: userId,
       name: name,
-      keyFilePath: path,
       subjects: defaultSubjects,
       maxCount: 2,
       currentCount: 1,

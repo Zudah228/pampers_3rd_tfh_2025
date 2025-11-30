@@ -14,7 +14,6 @@ _Room _$RoomFromJson(Map<String, dynamic> json) => $checkedCreate(
       id: $checkedConvert('id', (v) => v as String),
       createdBy: $checkedConvert('created_by', (v) => v as String),
       name: $checkedConvert('name', (v) => v as String?),
-      keyFilePath: $checkedConvert('key_file_path', (v) => v as String?),
       subjects: $checkedConvert(
         'subjects',
         (v) =>
@@ -35,7 +34,6 @@ _Room _$RoomFromJson(Map<String, dynamic> json) => $checkedCreate(
   },
   fieldKeyMap: const {
     'createdBy': 'created_by',
-    'keyFilePath': 'key_file_path',
     'maxCount': 'max_count',
     'currentCount': 'current_count',
     'createdAt': 'created_at',
@@ -47,7 +45,6 @@ abstract final class _$RoomJsonKeys {
   static const String id = 'id';
   static const String createdBy = 'created_by';
   static const String name = 'name';
-  static const String keyFilePath = 'key_file_path';
   static const String subjects = 'subjects';
   static const String maxCount = 'max_count';
   static const String currentCount = 'current_count';
@@ -59,7 +56,6 @@ Map<String, dynamic> _$RoomToJson(_Room instance) => <String, dynamic>{
   'id': instance.id,
   'created_by': instance.createdBy,
   'name': instance.name,
-  'key_file_path': instance.keyFilePath,
   'subjects': instance.subjects,
   'max_count': instance.maxCount,
   'current_count': instance.currentCount,
