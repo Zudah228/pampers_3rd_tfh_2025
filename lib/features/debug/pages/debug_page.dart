@@ -1,11 +1,11 @@
 import 'package:app/core/app/components/route_animations/route_animations.dart';
 import 'package:app/core/app/components/separator.dart';
+import 'package:app/features/debug/pages/debug_compare_faces_page.dart';
 import 'package:app/features/debug/pages/debug_components_page.dart';
 import 'package:app/features/debug/pages/debug_firebase_page.dart';
 import 'package:app/features/debug_firestore/pages/debug_firestore_pagination_page.dart';
 import 'package:app/features/debug_form/pages/debug_form_page.dart';
 import 'package:app/features/debug_mlkit/pages/debug_mlkit_face_detection_page.dart';
-import 'package:app/features/unlock/pages/unlock_page.dart';
 import 'package:flutter/material.dart';
 
 class DebugPage extends StatelessWidget {
@@ -65,10 +65,10 @@ class DebugPage extends StatelessWidget {
             },
           ),
           _ListTile(
-            leading: const Icon(Icons.lock),
-            title: const Text('ロック解除'),
+            leading: const Icon(Icons.face),
+            title: Text('顔比較関数'),
             onTap: () {
-              Navigator.push(context, UnlockPage.route());
+              Navigator.push(context, DebugCompareFacesPage.route());
             },
           ),
         ].separatedWith(const SizedBox(height: 16)),

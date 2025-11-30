@@ -66,14 +66,20 @@ export const compareFaces = functions.https.onCall(async (request) => {
         throw new functions.https.HttpsError("invalid-argument", "file_path,roomId が必要です")
     }
 
-    const groupImage = await download(filePath)
+    functions.logger.info(`compareFaces called by user: ${auth.uid}, filePath: ${filePath}, roomId: ${roomId}`)
 
-    const users = await firestore.collectionGroup("related_rooms").where("room_id", "==", roomId).get()
+    const groupImage = await download(filePath)
+    functions.logger.info(`downloaded ${filePath}`)
+
+    const users = await firestore.collectionGroup("related_rooms")
+    .where("room_id", "==", roomId).get()
 
     const hasUsers = users.docs.length > 0
     const userIds = users.docs
         .map((doc) => doc.data()?.user_id)
         .filter((userId): userId is string => typeof userId === "string")
+
+    functions.logger.info(`users: ${userIds}`)
 
     const userImages = await Promise.all(
         userIds.map(async (userId) => {
@@ -106,4 +112,8 @@ export const compareFaces = functions.https.onCall(async (request) => {
     return {
         success,
     }
+})
+
+export const helloWorld = functions.https.onCall((request, response) => {
+    return { message: "Hello from Firebase!" }
 })
