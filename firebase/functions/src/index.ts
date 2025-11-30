@@ -89,7 +89,7 @@ export const compareFaces = functions.https.onCall(async (request) => {
 
     const compareFacesResponses = await Promise.all(
         userImages.map(async (userImage) => {
-            return _compareFaces(groupImage, userImage)
+            return _compareFaces(userImage, groupImage)
         })
     )
 
