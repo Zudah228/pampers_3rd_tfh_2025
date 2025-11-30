@@ -1,6 +1,7 @@
 import 'package:app/core/app/components/layout/layout.dart';
 import 'package:app/core/app/components/unfocused_gesture_detecter.dart';
 import 'package:app/features/photo/components/add_photo.dart';
+import 'package:app/features/room/components/room_card.dart';
 import 'package:app/features/room/components/room_create_card.dart';
 import 'package:app/features/room/components/room_join_card.dart';
 import 'package:app/features/room/providers/my_room_provider.dart';
@@ -29,6 +30,7 @@ class HomePage extends ConsumerWidget {
               ] else ...[
                 Body(
                   children: [
+                    RoomCard(room: myRoom),
                     AddPhoto(),
                   ],
                 ),
