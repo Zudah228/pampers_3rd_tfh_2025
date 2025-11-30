@@ -1,5 +1,7 @@
 import 'package:app/core/app/components/layout/layout.dart';
+import 'package:app/core/app/components/unfocused_gesture_detecter.dart';
 import 'package:app/features/photo/components/add_photo.dart';
+import 'package:app/features/room/components/room_card.dart';
 import 'package:app/features/room/components/room_create_card.dart';
 import 'package:app/features/room/components/room_join_card.dart';
 import 'package:app/features/room/providers/my_room_provider.dart';
@@ -14,28 +16,28 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final myRoom = ref.watch(myRoomProvider).value;
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (myRoom == null) ...[
-            Headline2(child: Text('ルームを作成')),
-            Body(
-              children: [
+    return UnfocusedGestureDetecter(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (myRoom == null) ...[
                 RoomCreateCard(),
+                SizedBox(height: 48),
+                RoomJoinCard(),
+              ] else ...[
+                Body(
+                  children: [
+                    RoomCard(room: myRoom),
+                    AddPhoto(),
+                  ],
+                ),
               ],
-            ),
-            Headline2(child: Text('ルームに参加')),
-            Body(children: [RoomJoinCard()]),
-          ] else ...[
-            Body(
-              children: [
-                AddPhoto(),
-              ],
-            ),
-          ],
-        ],
+            ],
+          ),
+        ),
       ),
     );
   }

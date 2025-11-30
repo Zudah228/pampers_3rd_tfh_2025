@@ -52,11 +52,44 @@ abstract final class AppThemeData {
       borderSide: borderSide,
     );
 
+    final buttonStyleButtonShape = RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        SmoothRadius(cornerRadius: 14, cornerSmoothing: 0.2),
+      ),
+    );
+
     return foundation.copyWith(
       cardTheme: CardThemeData(
         clipBehavior: Clip.antiAlias,
-        color: colorScheme.surface,
+        color: colorScheme.surfaceContainer,
       ),
+      textTheme: foundation.textTheme
+          .apply(
+            bodyColor: colorScheme.onSurface,
+            displayColor: colorScheme.onSurface,
+          )
+          .copyWith(
+            titleLarge: foundation.textTheme.titleLarge!.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+            titleMedium: foundation.textTheme.titleMedium!.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          shape: buttonStyleButtonShape,
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(shape: buttonStyleButtonShape),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          shape: buttonStyleButtonShape,
+        ),
+      ),
+
       bottomSheetTheme: BottomSheetThemeData(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -69,16 +102,16 @@ abstract final class AppThemeData {
         fillColor: colorScheme.surfaceContainer,
         hintStyle: TextStyle(color: colorScheme.outlineVariant),
         enabledBorder: inputBorder(
-          BorderSide(color: colorScheme.outlineVariant, width: 2),
+          BorderSide(color: colorScheme.outline),
         ),
         focusedBorder: inputBorder(
-          BorderSide(color: colorScheme.primary, width: 2),
+          BorderSide(color: colorScheme.primary),
         ),
         errorBorder: inputBorder(
-          BorderSide(color: colorScheme.error, width: 2),
+          BorderSide(color: colorScheme.error),
         ),
         focusedErrorBorder: inputBorder(
-          BorderSide(color: colorScheme.error, width: 2),
+          BorderSide(color: colorScheme.error),
         ),
       ),
       listTileTheme: ListTileThemeData(

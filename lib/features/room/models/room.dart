@@ -11,7 +11,6 @@ abstract class Room with _$Room {
     required String id,
     required String createdBy,
     required String? name,
-    required String? keyFilePath,
     @Default([]) List<String> subjects,
     required int maxCount,
     required int currentCount,

@@ -16,19 +16,13 @@ class FieldDecorator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
-    ValueListenableBuilder(
-      valueListenable: TextEditingController(),
-      builder: (context, value, _) {
-        return Text(value.text);
-      },
-    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (label != null)
           DefaultTextStyle.merge(
-            style: themeData.textTheme.titleMedium,
+            style: themeData.textTheme.titleSmall,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.baseline,
               textBaseline: TextBaseline.alphabetic,
@@ -39,7 +33,7 @@ class FieldDecorator extends StatelessWidget {
               ],
             ),
           ),
-        SizedBox(height: 8),
+        SizedBox(height: 12),
         child,
       ],
     );

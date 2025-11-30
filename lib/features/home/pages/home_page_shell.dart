@@ -3,7 +3,6 @@ import 'package:app/core/app/theme/app_colors.dart';
 import 'package:app/features/home/pages/home_page.dart';
 import 'package:app/features/home/providers/main_tab_provider.dart';
 import 'package:app/features/settings/pages/settings_page.dart';
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -60,17 +59,12 @@ class _CustomBottomNavigationBar extends StatelessWidget {
         color: AppColors.cream,
         border: Border(
           top: BorderSide(
-            color: AppColors.softDenim,
+            color: AppColors.lightBeige,
             width: 1,
           ),
         ),
       ),
-      padding: EdgeInsets.only(
-        top: 16,
-        bottom: 16,
-        left: 24,
-        right: 24,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -107,8 +101,12 @@ class _NavigationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+    final colorScheme = themeData.colorScheme;
+
     if (isSelected) {
       return GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: onTap,
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -120,7 +118,7 @@ class _NavigationItem extends StatelessWidget {
                     width: 48,
                     height: 48,
                     decoration: BoxDecoration(
-                      color: AppColors.lightSand,
+                      color: colorScheme.primary,
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -142,7 +140,7 @@ class _NavigationItem extends StatelessWidget {
             Text(
               label,
               style: TextStyle(
-                color: AppColors.lightSand,
+                color: colorScheme.primary,
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),
@@ -153,6 +151,7 @@ class _NavigationItem extends StatelessWidget {
     } else {
       return GestureDetector(
         onTap: onTap,
+        behavior: HitTestBehavior.opaque,
         child: Padding(
           padding: EdgeInsets.only(top: 16),
           child: SizedBox(
