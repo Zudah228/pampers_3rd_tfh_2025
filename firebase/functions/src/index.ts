@@ -4,7 +4,7 @@ import { getFirestore } from "firebase-admin/firestore";
 import { getStorage } from "firebase-admin/storage";
 import * as functions from "firebase-functions/v2";
 
-initializeApp(functions.config().firebase);
+initializeApp();
 
 const firestore = getFirestore();
 firestore.settings({
