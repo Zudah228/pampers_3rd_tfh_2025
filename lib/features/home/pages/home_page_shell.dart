@@ -163,12 +163,13 @@ class _NavigationItem extends StatelessWidget {
                 Icon(
                   icon,
                   size: 24,
+                  color: AppColors.slateGray,
                 ),
                 const SizedBox(height: 16),
                 Text(
                   label,
                   style: TextStyle(
-                    color: AppColors.charcoal,
+                    color: AppColors.slateGray,
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                   ),
