@@ -61,6 +61,7 @@ flutter:
   assets:
     - assets/fonts/Noto_Sans_JP/
     - assets/fonts/Noto_Sans_JP/static/
+    - assets/app_icons/
   fonts:
     - family: Noto Sans JP
       fonts:
