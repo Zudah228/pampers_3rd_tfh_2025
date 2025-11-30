@@ -59,6 +59,7 @@ class ImageField extends StatelessWidget {
     }
 
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         for (var i = 0; i < math.min(value.length + 1, maxCount); i++)
           Container(
