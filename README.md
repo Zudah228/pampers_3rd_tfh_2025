@@ -1,5 +1,4 @@
-# ｛アプリ名｝
-スクリーンショット
+# LinkLock(リンクロック)
 
 ## 環境
 - フレームワーク等
@@ -15,6 +14,15 @@
 
 ## ディレクトリ構成
 
+```
+├── android  # ネイティブビルドファイル
+├── ios      #
+├── web      #
+├── assets   # アセット
+├── docs     # 規約等のドキュメント管理
+├── firebase # firebase のファイル管理
+└── lib
+```
 ## 環境設定
 firebase の設定ファイルを gitignore しているので、こちらで make コマンドで生成する必要があります。
 
@@ -47,4 +55,4 @@ make add_firebase_options
     - コード生成の手間、Provider参照のしづらさがあるため
   - 非同期の取得、アーキテクチャ設計に使用
   - State/Notifier は極力使わず、ウィジェットに閉じた変数管理を行う
-  - その他の方針は、［docs/coding_rules/PACKAGE_CODING.md](docs/coding_rules/PACKAGE_CODING.md)に明記している
+  - その他の方針は、[docs/coding_rules/PACKAGE_CODING.md](docs/coding_rules/PACKAGE_CODING.md#Riverpod)に明記している
