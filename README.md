@@ -36,6 +36,9 @@
 - アーキテクチャは feature-first を採用
   - layer-first で保たれる整合性より、他人とのバッティングが起きづらく、開発速度への耐性が高いと判断している
 - Riverpod による状態管理
+  - riverpod_generator は採用していない
+    - 昨今のアップデートにより、冗長性がかなり軽減されたため
+    - コード生成の手間、Provider参照のしづらさがあるため
   - 非同期の取得、アーキテクチャ設計に使用
   - State/Notifier は極力使わず、ウィジェットに閉じた変数管理を行う
   - その他の方針は、［docs/coding_rules/PACKAGE_CODING.md](docs/coding_rules/PACKAGE_CODING.md)に明記している
