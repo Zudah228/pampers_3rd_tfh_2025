@@ -25,6 +25,7 @@ class ImageField extends StatelessWidget {
     this.height,
     this.width,
     this.decoration,
+    this.addButton
   });
 
   final double? height;
@@ -33,6 +34,7 @@ class ImageField extends StatelessWidget {
   final Decoration? decoration;
   final List<ImageFieldValue> value;
   final ValueChanged<List<ImageFieldValue>> onChanged;
+  final Widget? addButton;
   final int maxCount;
 
   @override

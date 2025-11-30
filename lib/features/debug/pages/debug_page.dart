@@ -44,7 +44,7 @@ class DebugPage extends StatelessWidget {
             },
           ),
           _ListTile(
-            leading: const Icon(Icons.face),
+            leading: const Icon(Icons.face_retouching_natural),
             title: const Text('MLキットで顔認証'),
             onTap: () {
               Navigator.push(context, DebugMlkitFaceDetectionPage.route());
