@@ -1,11 +1,11 @@
 import 'package:app/core/app/components/button/primary_button.dart';
-import 'package:app/core/app/components/form/image/image_field.dart';
 import 'package:app/core/app/components/full_screen_loading_indicator.dart';
 import 'package:app/core/app/components/route_animations/route_animations.dart';
 import 'package:app/features/photo/pages/album_page.dart';
 import 'package:app/features/unlock/providers/unlock_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UnlockPage extends ConsumerWidget {
   const UnlockPage({super.key});
@@ -86,8 +86,13 @@ class UnlockPage extends ConsumerWidget {
                 backgroundColor: const Color(0xFFC9A882),
                 foregroundColor: Colors.white,
                 onPressed: () async {
-                  final image = await showImagePicker(context);
-                  if (image == null) return;
+                  // カメラで直接撮影
+                  final pickedImage = await ImagePicker().pickImage(
+                    source: ImageSource.camera,
+                  );
+                  if (pickedImage == null) return;
+
+                  final image = await pickedImage.readAsBytes();
 
                   // TODO: 撮影した画像を処理する。
                   // 画像の解析を行い、二人が写っているかどうかを判断する。
