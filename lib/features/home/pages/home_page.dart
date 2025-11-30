@@ -28,8 +28,13 @@ class HomePage extends ConsumerWidget {
             ),
             Headline2(child: Text('ルームに参加')),
             Body(children: [RoomJoinCard()]),
-          ] else
-            AddPhoto(),
+          ] else ...[
+            Body(
+              children: [
+                AddPhoto(),
+              ],
+            ),
+          ],
         ],
       ),
     );
