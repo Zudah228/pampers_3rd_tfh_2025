@@ -18,6 +18,9 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showErrorSnackBar({
 }) {
   String message = 'エラーが発生しました';
 
+  if (error is String) {
+    message = error;
+  }
   if (error is MessageException) {
     message = error.message;
   }
